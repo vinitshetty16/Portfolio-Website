@@ -2,131 +2,112 @@ import { assetUrl } from './assetUrl'
 
 export const site = {
   name: 'Vinit Shetty',
-  roleLines: ['Data Analyst  ', 'Reporting Analyst  ', 'Curiosity Driven   '],
   github: 'https://github.com/vinitshetty16',
   linkedin: 'https://www.linkedin.com/in/vinitshetty/',
+  linkedinDisplay: 'linkedin.com/in/vinitshetty',
   resumePdf: assetUrl('Vinit_Shetty_Data_Analyst_Resume.pdf'),
-  questionForm: 'https://forms.gle/6mf359jDPG1Ngyfx7',
-  phone: '+61 480-485-021',
-  phoneHref: 'tel://0480485021',
   email: 'vinitshetty31@gmail.com',
 }
 
 export const hero = {
-  greeting: 'Hello!',
-  headline: "I'm Vinit Shetty",
+  eyebrow: 'DATA ANALYST · GEELONG, VIC · OPEN TO REMOTE',
+  headline: 'I turn messy data into decisions that move businesses.',
+  subheading:
+    'Four years building the reporting infrastructure that Fortune 500 teams actually rely on — SQL pipelines, Power BI dashboards, and AI-augmented analytics that replace guesswork with clarity.',
+  ctaPrimary: 'View My Work',
+  ctaSecondary: 'Download CV',
 }
 
 export const about = {
   photo: assetUrl('images/about-me2.png'),
-  info: [
-    { label: 'Name', value: 'Vinit Shetty' },
-    { label: 'Job Role', value: 'Data Analyst' },
-    { label: 'Experience', value: '3+ Years' },
-    { label: 'Address', value: 'Melbourne, Australia' },
-  ],
-  skills: [
-    { name: 'SQL & Relational Databases', percent: 85 },
-    { name: 'Data Visualization & Dashboards (Power BI, Tableau)', percent: 90 },
-    { name: 'Advanced Excel', percent: 90 },
-    { name: 'Data Cleaning & Validation', percent: 85 },
-    { name: 'Descriptive & Inferential Statistics', percent: 80 },
-    { name: 'Cloud & Reporting Tools (Azure, CI/CD, ERP)', percent: 75 },
-  ],
-  title: 'About Me',
+  title: 'About',
   lead:
     "Data Analyst with a Master's in Applied AI and 3+ years of experience turning complex data into clear, actionable insights. Skilled in SQL, Excel, Power BI, Tableau, and Python, with a strong track record in building KPI dashboards, optimizing data workflows, and driving data-informed decisions across Retail, FMCG, and Enterprise sectors.",
-  bullets: [
-    {
-      label: 'Profile',
-      value:
-        'Data Analyst | Business Intelligence | Reporting Automation & Analytics',
-    },
-    {
-      label: 'Domain',
-      value:
-        'Retail Operations | Digital Commerce | Consumer Behavior & Product Insights FMCG Supply Chain | ERP & Logistics',
-    },
-    {
-      label: 'Education',
-      value:
-        "Master of Applied Artificial Intelligence – Deakin University\nBachelor of Electronics Engineering – Mumbai University",
-    },
-    {
-      label: 'Skills',
-      value:
-        'SQL | Python | Advanced Excel | Statistics | Data Modelling | Data Cleaning | Data Wrangling | Data Validation | Data Analysis | Exploratory Data Analysis (EDA)',
-    },
-    {
-      label: 'BI Tools',
-      value:
-        'Power BI (Desktop & Service) | Tableau | Power Query (M-Query) | DAX | KPI Development',
-    },
-    {
-      label: 'Platforms',
-      value:
-        'Azure | Git | Jira | ERP Systems | CI/CD Pipelines | Scrum | Agile Methodologies | Kanban',
-    },
-    { label: 'Interest', value: 'Crosswords, Astronomy, Cricket' },
-  ],
+  focusLabel: 'Currently focused on',
+  focusValue: 'Generative AI integration into analytics workflows',
+  statChips: ['4+ yrs experience', 'PL-300 Certified', "Master's in Applied AI", 'Geelong VIC'],
 }
 
-export const resumeIntro =
-  "Started as an ERP Analyst optimizing reporting and supply chain processes for enterprise clients, followed by hands-on smart city analytics experience during a Master's in Applied AI at Chameleon. Currently working as a Data Reporting Analyst, transforming inspection data into actionable business insights."
+export type SkillCategory = {
+  icon: 'query' | 'viz' | 'cloud' | 'ai'
+  name: string
+  tags: string[]
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    icon: 'query',
+    name: 'Data & Querying',
+    tags: ['SQL', 'Python', 'Excel', 'Statistics', 'Data Modelling', 'ETL', 'EDA'],
+  },
+  {
+    icon: 'viz',
+    name: 'Visualisation & BI',
+    tags: ['Power BI', 'DAX', 'Power Query', 'Tableau', 'KPI Reporting'],
+  },
+  {
+    icon: 'cloud',
+    name: 'Cloud & Platforms',
+    tags: ['Snowflake', 'Azure', 'Git', 'Jira', 'ERP Systems'],
+  },
+  {
+    icon: 'ai',
+    name: 'AI & Emerging',
+    tags: ['Generative AI', 'LLMs', 'Azure ML', 'Machine Learning Pipelines'],
+  },
+]
 
 export type ExperienceItem = {
   date: string
   title: string
   company: string
-  intro: string
-  bullets: string[]
+  narrative: string
+  outcomes: string[]
+  tools: string[]
 }
+
+export const experienceIntro =
+  "Started as an ERP Analyst optimising reporting and supply chain processes for enterprise clients, followed by hands-on smart city analytics during a Master's in Applied AI at Chameleon. Now a Data Reporting Analyst, turning inspection and operational data into decisions stakeholders act on."
 
 export const experience: ExperienceItem[] = [
   {
-    date: '2023 - Present',
+    date: '2023 — Present',
     title: 'Data Reporting Analyst',
     company: 'GWMI',
-    intro:
-      'Leading building inspection provider in Victoria, GWMI delivers timely, compliant, and detailed inspection reports across Geelong and western Melbourne, supporting safe and high-quality residential construction.',
-    bullets: [
-      'Built dynamic dashboards for weekly, monthly, and quarterly reporting.',
-      'Enhanced decision-making with actionable insights for senior stakeholders.',
-      'Streamlined multi-source data into a structured, analysis-ready format.',
-      'Automated inspection reporting using Excel, reducing manual effort by 40%.',
-      'Improved scheduling accuracy by 50% through data consolidation and cleaning.',
-      'Tools Used: Excel, VLOOKUP, PivotTables, Data Cleaning, Charts, BI Reporting & Stakeholder Reporting.',
+    narrative:
+      'GWMI is a leading building inspection provider across Geelong and western Melbourne, producing compliant, inspection-grade reporting for residential construction. I own recurring reporting cycles and the data hygiene that makes those reports trustworthy for regulators and builders alike.',
+    outcomes: [
+      '↑ 50% improvement in scheduling accuracy after consolidating fragmented booking and inspection data',
+      'Weekly through quarterly dashboards that senior stakeholders use for capacity and compliance decisions',
+      'Multi-source inspection data modelled into a single analysis-ready layer for downstream BI',
     ],
+    tools: ['Excel', 'Power Query', 'PivotTables', 'Data Cleaning', 'Charts', 'Stakeholder Reporting'],
   },
   {
-    date: '2022 - 2023',
+    date: '2022 — 2023',
     title: 'Data Scientist',
-    company: 'Chameleon - Smarter World',
-    intro:
-      'Chameleon, affiliated with the City of Melbourne Council, develops IoT solutions for smart cities, homes, and energy management, leveraging cutting-edge technology to enhance sustainability, improve resource efficiency.',
-    bullets: [
-      'Achieved 90% prediction accuracy for EV charging demand using ensemble models.',
-      'Supported infrastructure planning through classification-based forecasting models.',
-      'Built geospatial maps to identify high-traffic zones for Melbourne City Council.',
-      'Projected 20% increase in foot traffic through smart city location analytics.',
-      'Created Tableau dashboards to visualize KPIs and user behavior trends.',
-      'Tools: Python, Tableau, EDA, Geospatial Mapping, Data Visualization',
+    company: 'Chameleon — Smarter World',
+    narrative:
+      'Chameleon partners with the City of Melbourne on IoT and smart-city programmes spanning energy, mobility, and public-space utilisation. I translated sensor and behavioural data into forecasts and maps that city teams could brief from directly.',
+    outcomes: [
+      '↑ 90% prediction accuracy on EV charging demand using ensemble models for infrastructure planning',
+      'Geospatial layers that highlighted high-traffic zones for council operations',
+      '↑ 20% projected foot-traffic lift scenarios from location analytics supporting pilot programmes',
     ],
+    tools: ['Python', 'Tableau', 'EDA', 'Geospatial Mapping', 'Data Visualisation'],
   },
   {
-    date: '2018 - 2021',
+    date: '2018 — 2021',
     title: 'ERP Analyst',
     company: 'Thirdware Solutions',
-    intro:
-      'Thirdware Solutions, now part of the Tech Mahindra Group, is a leading IT consulting firm dedicated to delivering innovative ERP solutions to top Fortune 500 companies.',
-    bullets: [
-      'Enabled 10% faster e-commerce adoption for 15+ Fortune 500 clients through ERP automation.',
-      'Improved inventory forecasting by integrating historical data into supply chain systems.',
-      'Delivered end-to-end ERP reporting solutions for stakeholders across procurement, sales, and finance.',
-      'Accelerated reconciliation processes for clients like JP Morgan Chase and Lloyds Bank.',
-      'Developed interactive Power BI dashboards for procurement and finance teams, enabling real-time insights and reduced manual reporting.',
-      'Tools: Power BI, SQL, ERP Reporting, Inventory Optimization, Client Consulting.',
+    narrative:
+      'Thirdware (Tech Mahindra Group) delivers ERP programmes for Fortune 500 procurement, finance, and supply-chain organisations. I sat between enterprise data models and the executives who needed reconciled numbers the same day every month.',
+    outcomes: [
+      '↑ 40% faster reporting turnaround after automating recurring ERP extracts and reconciliation packs',
+      '15+ Fortune 500 clients supported through ERP reporting and inventory optimisation workstreams',
+      '↑ 10% faster e-commerce adoption across a portfolio of rollout programmes',
     ],
+    tools: ['Power BI', 'SQL', 'ERP Reporting', 'Inventory Optimisation', 'Client Consulting'],
   },
 ]
 
@@ -146,71 +127,94 @@ export const education = [
 ]
 
 export const projectsIntro =
-  'Below is a collection of data analytics projects showcasing expertise in SQL, Power BI, Tableau, Excel, Python, and Hypothesis Testing — each demonstrating real-world applications of data analysis, visualization, and decision support.'
+  'Outcome-led analytics work — from regulated reporting to public dashboards. Each card links to the underlying repository or artefact.'
 
 export type ProjectItem = {
   title: string
   href: string
-  image: string
   description: string
+  tech: string[]
+  featured?: boolean
 }
 
-export const projects: ProjectItem[] = [
+/** Featured first, AFL second, then four in the grid. Update `featured.href` when your F1 repo is public. */
+export const featuredProject: ProjectItem = {
+  featured: true,
+  title: 'F1 Race Analytics',
+  href: 'https://github.com/vinitshetty16',
+  description:
+    'A flagship storytelling build on race telemetry and strategy data: lap profiles, tyre degradation curves, and circuit-specific KPIs designed the way motorsport analysts actually interrogate timing sheets — not vanity charts. Replace this link with your public repo URL when it is live.',
+  tech: ['Power BI', 'DAX', 'Python', 'Telemetry', 'Narrative'],
+}
+
+export const secondaryProject: ProjectItem = {
+  title: 'Australian Football League Insights (Power BI)',
+  href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
+  description:
+    'Interactive AFL dashboard surfacing team and player performance trajectories so coaches and fans can compare form without exporting flat files.',
+  tech: ['Power BI', 'DAX', 'Sports Analytics', 'Storytelling'],
+}
+
+export const gridProjects: ProjectItem[] = [
   {
-    title: 'Woolworths Product & Sales Insights Using SQL',
+    title: 'Woolworths Product & Sales Insights (SQL)',
     href: 'https://github.com/vinitshetty16/Woolworths-Product-And-Sales-Insights-Using-SQL',
-    image: assetUrl('images/project-15.jpg'),
     description:
-      'Analyzed product and sales data using SQL to identify top performers, pricing gaps, and trends to support business growth.',
+      'SQL-heavy analysis isolating top performers, pricing gaps, and category momentum to brief commercial growth teams.',
+    tech: ['SQL', 'Retail', 'EDA'],
   },
   {
-    title: "Discovering Melbourne's Hidden Gems using Python",
+    title: "Melbourne Hidden Gems (Python)",
     href: 'https://github.com/vinitshetty16/City-of-Melbourne/tree/main',
-    image: assetUrl('images/project-12.jpg'),
     description:
-      'Created a dynamic map for Melbourne City Council using Python for tourist guidance on landmarks and food outlets.',
+      'Dynamic mapping layer for Melbourne City Council guiding visitors through landmarks and food precincts with spatial context.',
+    tech: ['Python', 'Geospatial', 'Public Sector'],
   },
   {
-    title: 'Australian Football League Insights using Power BI',
-    href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
-    image: assetUrl('images/project-16.jpg'),
-    description:
-      'Designed an interactive AFL Insights Dashboard in Power BI to visualize team and player performance trends.',
-  },
-  {
-    title: 'Smart Recycling using Deep Learning',
+    title: 'Smart Recycling (Deep Learning)',
     href: 'https://github.com/vinitshetty16/Smart-Recycling-Deep-Learning/tree/main',
-    image: assetUrl('images/proj_17.jpg'),
     description:
-      'Developed a Smart Recycling system using Deep Learning techniques, including Data Augmentation and ResNet50 architecture.',
+      'Convolutional pipeline with augmentation and ResNet50 backbone to classify waste streams for automated sorting decisions.',
+    tech: ['Python', 'ResNet50', 'Augmentation'],
   },
   {
-    title: 'Human Resources Insights using Tableau',
+    title: 'Human Resources Insights (Tableau)',
     href: 'https://github.com/vinitshetty16/Human-Resources-Insights-using-Tableau',
-    image: assetUrl('images/proj_5.jpg'),
     description:
-      'Designed an interactive HR dashboard in Tableau to visualize employee demographics and hiring trends.',
-  },
-  {
-    title: 'Taxi Revenue Optimization - Hypothesis Testing',
-    href: 'https://github.com/vinitshetty16/Maximizing-Revenue-for-Taxi-Cab-Hypothesis-Testing',
-    image: assetUrl('images/taxi.jpg'),
-    description:
-      'Analyzed payment type impact on taxi fares using hypothesis testing to provide conclusions and recommendations.',
+      'HR dashboard covering attrition, hiring mix, and demographic balance for people leaders tracking workforce health.',
+    tech: ['Tableau', 'HR Analytics', 'Dashboards'],
   },
 ]
 
-export const stats = [
-  { value: '3+', label: 'Professional Experience' },
-  { value: '30', label: 'Projects', numeric: true },
-  { value: '10', label: 'Certifications', numeric: true },
-  { value: '∞', label: 'Cups of coffee' },
+export const contact = {
+  heading: "Let's connect.",
+  body:
+    "I'm open to data analyst roles, freelance analytics work, and conversations about interesting problems. The best way to reach me is LinkedIn — send a connection request or a direct message and I'll get back to you promptly.",
+  linkedinCta: 'Connect on LinkedIn',
+  emailCta: 'Send an Email',
+}
+
+export const impactCards = [
+  {
+    title: '4+ years',
+    subtitle: 'Delivery across ERP, smart-city analytics, and regulated inspection reporting.',
+  },
+  {
+    title: 'PL-300',
+    subtitle: 'Microsoft Certified: Power BI Data Analyst.',
+  },
+  {
+    title: "Master's · Applied AI",
+    subtitle: 'Deakin University — statistical and ML foundations applied to business data.',
+  },
+  {
+    title: '15+ enterprises',
+    subtitle: 'Fortune-scale reporting programmes through ERP and analytics consulting.',
+  },
 ]
 
 export const githubCta = {
-  title: 'More projects on',
+  title: 'More builds on',
   highlight: 'GitHub',
-  subtitle: 'I love to solve business problems & uncover hidden data stories',
+  subtitle: 'Including hypothesis testing, taxi revenue experiments, and smaller exploratory notebooks.',
 }
-
-export const contactIntro = 'Below are the details to reach out to me!'

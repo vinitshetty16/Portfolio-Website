@@ -1,24 +1,64 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { site } from '../content'
 
 const links = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#resume', label: 'Resume' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { id: 'home', href: '#home', label: 'Home' },
+  { id: 'about', href: '#about', label: 'About' },
+  { id: 'skills', href: '#skills', label: 'Skills' },
+  { id: 'experience', href: '#experience', label: 'Experience' },
+  { id: 'projects', href: '#projects', label: 'Projects' },
+  { id: 'contact', href: '#contact', label: 'Contact' },
 ]
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [active, setActive] = useState('home')
+  const navRef = useRef<HTMLElement>(null)
+  const linksRef = useRef<HTMLElement>(null)
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 })
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20)
+      const y = window.scrollY + 120
+      let current = 'home'
+      for (const { id } of links) {
+        const el = document.getElementById(id)
+        if (el && el.offsetTop <= y) current = id
+      }
+      setActive(current)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useLayoutEffect(() => {
+    const track = linksRef.current
+    if (!track) return
+    const idx = links.findIndex((l) => l.id === active)
+    const link = linkRefs.current[idx]
+    if (!link) return
+    const tr = track.getBoundingClientRect()
+    const lr = link.getBoundingClientRect()
+    setIndicator({ left: lr.left - tr.left, width: lr.width })
+  }, [active, open])
+
+  useEffect(() => {
+    const onResize = () => {
+      const track = linksRef.current
+      const idx = links.findIndex((l) => l.id === active)
+      const link = linkRefs.current[idx]
+      if (!track || !link) return
+      const tr = track.getBoundingClientRect()
+      const lr = link.getBoundingClientRect()
+      setIndicator({ left: lr.left - tr.left, width: lr.width })
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [active])
 
   const go = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
@@ -27,10 +67,9 @@ export function Navbar() {
   }
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+    <header ref={navRef} className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner">
-        <a href="#home" className="nav__brand" onClick={(e) => go(e, '#home')}>
-          <span className="nav__brand-mark" aria-hidden />
+        <a href="#home" className="nav__brand font-mono" onClick={(e) => go(e, '#home')}>
           {site.name}
         </a>
         <button
@@ -44,16 +83,27 @@ export function Navbar() {
           <span />
           <span />
         </button>
-        <nav className={`nav__links ${open ? 'nav__links--open' : ''}`}>
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)}>
-              {l.label}
-            </a>
-          ))}
-          <a className="nav__cta" href={site.resumePdf} download>
-            CV
+        <div className={`nav__cluster ${open ? 'nav__cluster--open' : ''}`}>
+          <nav ref={linksRef} className="nav__links" aria-label="Primary">
+            <span className="nav__indicator" style={{ transform: `translateX(${indicator.left}px)`, width: indicator.width }} />
+            {links.map((l, i) => (
+              <a
+                key={l.href}
+                ref={(el) => {
+                  linkRefs.current[i] = el
+                }}
+                href={l.href}
+                className={active === l.id ? 'is-active' : ''}
+                onClick={(e) => go(e, l.href)}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <a className="nav__cv font-mono" href={site.resumePdf} download>
+            Download CV
           </a>
-        </nav>
+        </div>
       </div>
     </header>
   )

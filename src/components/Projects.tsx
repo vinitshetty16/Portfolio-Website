@@ -1,63 +1,58 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { projects, projectsIntro, site } from '../content'
+import { featuredProject, gridProjects, projectsIntro, secondaryProject, site } from '../content'
 import type { ProjectItem } from '../content'
-import { Project3DCanvas } from './Project3DCanvas'
+import { Reveal } from './Reveal'
+
+function ProjectCard({ project }: { project: ProjectItem }) {
+  return (
+    <article className={`project-card ${project.featured ? 'project-card--featured' : ''}`}>
+      {project.featured && <span className="project-card__badge font-mono">Featured project</span>}
+      <div className="project-card__banner">
+        <ul className="project-card__tech font-mono">
+          {project.tech.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="project-card__body">
+        <h3 className="project-card__title font-display">{project.title}</h3>
+        <p className="project-card__desc font-body">{project.description}</p>
+        <a className="project-card__link font-mono" href={project.href} target="_blank" rel="noreferrer">
+          View project →
+        </a>
+      </div>
+    </article>
+  )
+}
 
 export function Projects() {
-  const [active, setActive] = useState<ProjectItem>(projects[0])
-
   return (
-    <section id="projects" className="section projects">
+    <section id="projects" className="section section--alt projects">
       <div className="section__inner">
-        <header className="section__head section__head--center">
-          <p className="section__eyebrow">Portfolio</p>
-          <h2 className="section__title">Projects</h2>
-          <p className="section__lead">{projectsIntro}</p>
-        </header>
+        <Reveal>
+          <header className="section__head section__head--center">
+            <h2 className="section__title font-display">Projects</h2>
+            <p className="section__lead font-body">{projectsIntro}</p>
+          </header>
+        </Reveal>
 
-        <div className="projects__layout">
-          <motion.div
-            className="projects__stage glass"
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
-          >
-            <div className="projects__stage-label">3D preview</div>
-            <Project3DCanvas imageUrl={active.image} />
-            <div className="projects__stage-footer">
-              <h3 className="projects__stage-title">{active.title}</h3>
-              <p className="projects__stage-desc">{active.description}</p>
-              <a className="btn btn--primary" href={active.href} target="_blank" rel="noreferrer">
-                View repository
-              </a>
-            </div>
-          </motion.div>
+        <Reveal className="projects__featured">
+          <ProjectCard project={featuredProject} />
+        </Reveal>
 
-          <ul className="projects__list" role="list">
-            {projects.map((p) => (
-              <li key={p.href}>
-                <button
-                  type="button"
-                  className={`projects__chip ${active.href === p.href ? 'projects__chip--active' : ''}`}
-                  onMouseEnter={() => setActive(p)}
-                  onFocus={() => setActive(p)}
-                  onClick={() => setActive(p)}
-                >
-                  <span className="projects__chip-thumb" style={{ backgroundImage: `url(${p.image})` }} />
-                  <span className="projects__chip-body">
-                    <span className="projects__chip-title">{p.title}</span>
-                    <span className="projects__chip-meta">GitHub · Analytics</span>
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
+        <Reveal className="projects__secondary">
+          <ProjectCard project={secondaryProject} />
+        </Reveal>
+
+        <div className="projects__grid">
+          {gridProjects.map((p) => (
+            <Reveal key={p.href} className="projects__cell">
+              <ProjectCard project={p} />
+            </Reveal>
+          ))}
         </div>
 
-        <p className="projects__hint">
-          Hover or focus a project to update the 3D preview — same repos as on{' '}
+        <p className="projects__more font-body">
+          More experiments and notebooks on{' '}
           <a href={site.github} target="_blank" rel="noreferrer">
             GitHub
           </a>

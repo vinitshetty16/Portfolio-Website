@@ -1,76 +1,56 @@
-import { motion } from 'framer-motion'
-import { contactIntro, site } from '../content'
+import { contact, site } from '../content'
+import { Reveal } from './Reveal'
 
-const cards = [
-  {
-    title: 'LinkedIn',
-    body: <a href={site.linkedin}>View Profile</a>,
-  },
-  {
-    title: 'Contact Number',
-    body: (
-      <a href={site.phoneHref} target="_blank" rel="noreferrer">
-        {site.phone}
-      </a>
-    ),
-  },
-  {
-    title: 'Email Address',
-    body: (
-      <a href={`mailto:${site.email}`} target="_blank" rel="noreferrer">
-        {site.email}
-      </a>
-    ),
-  },
-  {
-    title: 'Download Resume',
-    body: (
-      <a href={site.resumePdf} download>
-        Click Here
-      </a>
-    ),
-  },
-]
+function LinkedInIcon() {
+  return (
+    <svg className="contact__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M6.5 8.5h-3V21h3V8.5Zm-1.5-5a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5ZM21 13.2c0-3.4-1.8-5-4.2-5-1.9 0-2.8 1-3.3 1.7V8.5H11V21h3.2v-5.8c0-1.3.9-2.6 2.6-2.6 1.8 0 2.2 1.4 2.2 2.8V21H21V13.2Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function MailIcon() {
+  return (
+    <svg className="contact__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 6h16v12H4V6Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
 export function Contact() {
   return (
-    <section id="contact" className="section contact">
-      <div className="section__inner">
-        <header className="section__head section__head--center">
-          <p className="section__eyebrow">Connect</p>
-          <h2 className="section__title">Contact Me</h2>
-          <p className="section__lead">{contactIntro}</p>
-        </header>
+    <section id="contact" className="section section--alt contact">
+      <div className="section__inner contact__inner">
+        <Reveal>
+          <h2 className="contact__heading font-display">{contact.heading}</h2>
+          <p className="contact__body font-body">{contact.body}</p>
+        </Reveal>
 
-        <div className="contact__grid">
-          {cards.map((c, i) => (
-            <motion.article
-              key={c.title}
-              className="contact-card glass"
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.05 }}
-            >
-              <h3 className="contact-card__title">{c.title}</h3>
-              <div className="contact-card__body">{c.body}</div>
-            </motion.article>
-          ))}
+        <div className="contact__actions">
+          <Reveal className="contact__card contact__card--primary">
+            <a href={site.linkedin} target="_blank" rel="noreferrer" className="contact__card-link">
+              <LinkedInIcon />
+              <span className="contact__card-label font-mono">{contact.linkedinCta}</span>
+              <span className="contact__card-sub font-mono">{site.linkedinDisplay}</span>
+            </a>
+          </Reveal>
+          <Reveal className="contact__card contact__card--secondary">
+            <a href={`mailto:${site.email}`} className="contact__card-link">
+              <MailIcon />
+              <span className="contact__card-label font-mono">{contact.emailCta}</span>
+              <span className="contact__card-sub font-mono">{site.email}</span>
+            </a>
+          </Reveal>
         </div>
-
-        <motion.div
-          className="contact__question glass"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="contact__question-title">
-            Have a <span className="contact__question-hl">Question?</span>
-          </h2>
-          <a className="btn btn--primary" href={site.questionForm} target="_blank" rel="noreferrer">
-            Click Here
-          </a>
-        </motion.div>
       </div>
     </section>
   )

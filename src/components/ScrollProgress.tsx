@@ -23,7 +23,7 @@ export function ScrollProgress() {
       aria-valuemin={0}
       aria-valuemax={100}
     >
-      <div className="scroll-progress__bar" style={{ transform: `scaleX(${p})` }} />
+      <div className="scroll-progress__bar scroll-progress__bar--amber" style={{ transform: `scaleX(${p})` }} />
     </div>
   )
 }

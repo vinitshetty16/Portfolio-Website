@@ -4,7 +4,7 @@ type Props = { children: ReactNode }
 
 type State = { hasError: boolean }
 
-/** Prevents a single uncaught render error from wiping the entire UI (e.g. WebGL / texture). */
+/** Prevents a single uncaught render error from wiping the entire UI. */
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false }
 
