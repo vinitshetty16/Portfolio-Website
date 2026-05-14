@@ -40,12 +40,12 @@ export type SkillCategory = {
 export const skillCategories: SkillCategory[] = [
   {
     icon: 'query',
-    name: 'Data and Querying',
+    name: 'Data & Querying',
     tags: ['SQL', 'Python', 'Excel', 'Statistics', 'Data Modelling', 'ETL', 'EDA'],
   },
   {
     icon: 'viz',
-    name: 'Visualisation & BI',
+    name: 'Visualisation and BI',
     tags: ['Power BI', 'DAX', 'Power Query', 'Tableau', 'KPI Reporting'],
   },
   {
@@ -176,7 +176,8 @@ export const educationCards: EducationFlip[] = [
 export const projectsIntro =
   'Decision-grade analytics: each build connects data to a business outcome — capacity, margin, compliance, or revenue — not charts for their own sake.'
 
-export type ProjectBanner = 'f1-three' | 'radar' | 'bars' | 'grid' | 'donut' | 'scatter'
+/** Each value maps to a domain-obvious banner (no abstract geometry). */
+export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter' | 'recycle'
 
 export type ProjectItem = {
   title: string
@@ -189,7 +190,7 @@ export type ProjectItem = {
 
 export const featuredProject: ProjectItem = {
   featured: true,
-  banner: 'f1-three',
+  banner: 'f1-car',
   title: 'F1 Race Analytics Pipeline',
   href: 'https://github.com/vinitshetty16',
   description:
@@ -198,7 +199,7 @@ export const featuredProject: ProjectItem = {
 }
 
 export const secondaryProject: ProjectItem = {
-  banner: 'radar',
+  banner: 'afl-oval',
   title: 'Australian Football League Insights (Power BI)',
   href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
   description:

@@ -13,11 +13,14 @@ export function About() {
 
         <div className="about__grid">
           <Reveal>
-            <div className="about-3d-wrap tilt-card" data-tilt-max="10">
-              <div className="about-3d__rock">
-                <div className="about-3d__border" aria-hidden />
-                <img src={about.photo} alt="Vinit Shetty" className="about-3d__img" width={360} height={440} />
-              </div>
+            <div className="about-photo">
+              <img
+                src={about.photo}
+                alt="Vinit Shetty"
+                className="about-photo__img"
+                width={300}
+                height={380}
+              />
             </div>
           </Reveal>
 

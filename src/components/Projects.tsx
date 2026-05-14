@@ -3,7 +3,6 @@ import { featuredProject, gridProjects, projectsIntro, secondaryProject } from '
 import type { ProjectItem } from '../content'
 import { Reveal } from './Reveal'
 import { ProjectBannerSvg } from './ProjectBannerSvg'
-import { F1BannerThree } from './F1BannerThree'
 
 function ProjectCard({ project }: { project: ProjectItem }) {
   const [vis, setVis] = useState(false)
@@ -23,8 +22,6 @@ function ProjectCard({ project }: { project: ProjectItem }) {
     o.observe(el)
     return () => o.disconnect()
   }, [])
-
-  const isF1 = project.banner === 'f1-three'
 
   const onGlareMove = (e: MouseEvent<HTMLElement>) => {
     const root = rootRef.current
@@ -54,26 +51,15 @@ function ProjectCard({ project }: { project: ProjectItem }) {
     >
       <div ref={glareRef} className="project-card__glare" aria-hidden />
       {project.featured && <span className="project-card__badge font-mono">Featured project</span>}
-      <div className={`project-card__banner ${isF1 ? 'project-card__banner--f1' : ''}`}>
-        {isF1 ? (
-          <>
-            <F1BannerThree boost={hover} />
-            <ul className="project-card__tech project-card__tech--f1 font-mono">
-              {project.tech.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <ProjectBannerSvg kind={project.banner} visible={vis} />
-            <ul className="project-card__tech font-mono">
-              {project.tech.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </>
-        )}
+      <div className={`project-card__banner ${project.featured ? 'project-card__banner--featured' : ''}`}>
+        <ProjectBannerSvg kind={project.banner} visible={vis} boost={hover} />
+        <ul
+          className={`project-card__tech font-mono ${project.featured ? 'project-card__tech--featured' : ''}`}
+        >
+          {project.tech.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
       </div>
       <div className="project-card__body">
         <h3 className="project-card__title font-display">{project.title}</h3>
