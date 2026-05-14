@@ -21,7 +21,8 @@ export const hero = {
 }
 
 export const about = {
-  photo: assetUrl('images/about-me2.png'),
+  /** Rectangular export preferred — old file may include a circular gold frame baked into pixels. */
+  photo: `${assetUrl('images/about-me2.png')}?v=rect-frame-1`,
   title: 'About',
   lead:
     "I am a Data Analyst with four years of experience and a Master's in Applied AI — I have spent my career inside the reporting layers that enterprise teams depend on daily. At Thirdware I owned the analytics stack for procurement, inventory, and supply chain operations across 15-plus Fortune 500 manufacturers. At GWMI I rebuilt the entire reporting cycle from fragmented spreadsheets into a structured, audit-ready data layer. I combine deep SQL and Power BI craft with a genuine understanding of how operations actually run — which means the insights I deliver are not just technically correct, they are ones stakeholders can act on immediately.",

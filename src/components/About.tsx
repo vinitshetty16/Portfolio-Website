@@ -12,37 +12,10 @@ export function About() {
         </Reveal>
 
         <div className="about__grid">
-          <Reveal>
-            <div
-              className="about-profile-slot"
-              style={{
-                width: '100%',
-                maxWidth: 320,
-                height: 360,
-                borderRadius: 16,
-                overflow: 'hidden',
-                position: 'relative',
-                border: '2px solid rgba(59, 130, 246, 0.4)',
-                margin: '0 auto',
-                boxSizing: 'border-box',
-              }}
-            >
-              <img
-                src={about.photo}
-                alt="Vinit Shetty"
-                width={320}
-                height={360}
-                decoding="async"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  display: 'block',
-                }}
-              />
-            </div>
-          </Reveal>
+          {/* No Reveal wrapper — avoids transform stacking with overflow; frame is CSS-only */}
+          <div className="about-profile-frame">
+            <img src={about.photo} alt="Vinit Shetty" width={320} height={360} decoding="async" />
+          </div>
 
           <Reveal stagger className="about__copy">
             <p className="about__lead font-body">{about.lead}</p>
