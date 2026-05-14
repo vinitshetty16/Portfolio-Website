@@ -1,9 +1,11 @@
+import { assetUrl } from './assetUrl'
+
 export const site = {
   name: 'Vinit Shetty',
   roleLines: ['Data Analyst  ', 'Reporting Analyst  ', 'Curiosity Driven   '],
   github: 'https://github.com/vinitshetty16',
   linkedin: 'https://www.linkedin.com/in/vinitshetty/',
-  resumePdf: '/Vinit_Shetty_Data_Analyst_Resume.pdf',
+  resumePdf: assetUrl('Vinit_Shetty_Data_Analyst_Resume.pdf'),
   questionForm: 'https://forms.gle/6mf359jDPG1Ngyfx7',
   phone: '+61 480-485-021',
   phoneHref: 'tel://0480485021',
@@ -16,7 +18,7 @@ export const hero = {
 }
 
 export const about = {
-  photo: '/images/about-me2.png',
+  photo: assetUrl('images/about-me2.png'),
   info: [
     { label: 'Name', value: 'Vinit Shetty' },
     { label: 'Job Role', value: 'Data Analyst' },
@@ -157,42 +159,42 @@ export const projects: ProjectItem[] = [
   {
     title: 'Woolworths Product & Sales Insights Using SQL',
     href: 'https://github.com/vinitshetty16/Woolworths-Product-And-Sales-Insights-Using-SQL',
-    image: '/images/project-15.jpg',
+    image: assetUrl('images/project-15.jpg'),
     description:
       'Analyzed product and sales data using SQL to identify top performers, pricing gaps, and trends to support business growth.',
   },
   {
     title: "Discovering Melbourne's Hidden Gems using Python",
     href: 'https://github.com/vinitshetty16/City-of-Melbourne/tree/main',
-    image: '/images/project-12.jpg',
+    image: assetUrl('images/project-12.jpg'),
     description:
       'Created a dynamic map for Melbourne City Council using Python for tourist guidance on landmarks and food outlets.',
   },
   {
     title: 'Australian Football League Insights using Power BI',
     href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
-    image: '/images/project-16.jpg',
+    image: assetUrl('images/project-16.jpg'),
     description:
       'Designed an interactive AFL Insights Dashboard in Power BI to visualize team and player performance trends.',
   },
   {
     title: 'Smart Recycling using Deep Learning',
     href: 'https://github.com/vinitshetty16/Smart-Recycling-Deep-Learning/tree/main',
-    image: '/images/proj_17.jpg',
+    image: assetUrl('images/proj_17.jpg'),
     description:
       'Developed a Smart Recycling system using Deep Learning techniques, including Data Augmentation and ResNet50 architecture.',
   },
   {
     title: 'Human Resources Insights using Tableau',
     href: 'https://github.com/vinitshetty16/Human-Resources-Insights-using-Tableau',
-    image: '/images/proj_5.jpg',
+    image: assetUrl('images/proj_5.jpg'),
     description:
       'Designed an interactive HR dashboard in Tableau to visualize employee demographics and hiring trends.',
   },
   {
     title: 'Taxi Revenue Optimization - Hypothesis Testing',
     href: 'https://github.com/vinitshetty16/Maximizing-Revenue-for-Taxi-Cab-Hypothesis-Testing',
-    image: '/images/taxi.jpg',
+    image: assetUrl('images/taxi.jpg'),
     description:
       'Analyzed payment type impact on taxi fares using hypothesis testing to provide conclusions and recommendations.',
   },

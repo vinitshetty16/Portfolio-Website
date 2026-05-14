@@ -1,12 +1,17 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, RoundedBox, useTexture } from '@react-three/drei'
-import { Suspense, useRef } from 'react'
+import { Suspense, useLayoutEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function TexturedPanel({ url }: { url: string }) {
   const texture = useTexture(url)
-  texture.colorSpace = THREE.SRGBColorSpace
-  texture.anisotropy = 8
+  const { gl } = useThree()
+
+  useLayoutEffect(() => {
+    texture.colorSpace = THREE.SRGBColorSpace
+    texture.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy())
+  }, [texture, gl])
+
   const group = useRef<THREE.Group>(null)
 
   useFrame((_, delta) => {
