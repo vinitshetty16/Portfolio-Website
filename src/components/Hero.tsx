@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { hero, site } from '../content'
-import { HeroGraph } from './HeroGraph'
+import { HeroDashboard } from './HeroDashboard'
+import { HeroParticles } from './HeroParticles'
 
 export function Hero() {
   const [mounted, setMounted] = useState(false)
@@ -12,8 +13,8 @@ export function Hero() {
 
   return (
     <section id="home" className={`hero ${mounted ? 'hero--mounted' : ''}`}>
+      <HeroParticles />
       <div className="hero__bg-grid" aria-hidden />
-      <div className="hero__glow" aria-hidden />
       <div className="hero__inner section__inner">
         <div className="hero__grid2">
           <div className="hero__copy">
@@ -28,8 +29,9 @@ export function Hero() {
                 {hero.ctaSecondary}
               </a>
             </div>
+            <p className="hero__seeking font-mono">{hero.seeking}</p>
           </div>
-          <HeroGraph />
+          <HeroDashboard />
         </div>
       </div>
     </section>

@@ -12,18 +12,19 @@ export function About() {
         </Reveal>
 
         <div className="about__grid">
-          <Reveal className="about__frame-wrap">
-            <div className="about__frame">
-              <div className="about__frame-offset" aria-hidden />
-              <img src={about.photo} alt="Vinit Shetty" className="about__photo" width={360} height={440} />
+          <Reveal>
+            <div className="about-3d-wrap tilt-card" data-tilt-max="10">
+              <div className="about-3d__rock">
+                <div className="about-3d__border" aria-hidden />
+                <img src={about.photo} alt="Vinit Shetty" className="about-3d__img" width={360} height={440} />
+              </div>
             </div>
           </Reveal>
 
           <Reveal stagger className="about__copy">
             <p className="about__lead font-body">{about.lead}</p>
             <p className="about__focus font-mono">
-              <span className="about__focus-label">{about.focusLabel}</span>{' '}
-              <span className="about__focus-arrow">→</span> {about.focusValue}
+              <span className="about__focus-label">{about.focusLabel}</span> {about.focusValue}
             </p>
             <ul className="about__chips font-mono">
               {about.statChips.map((chip) => (

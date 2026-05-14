@@ -1,13 +1,11 @@
 import { contact, site } from '../content'
 import { Reveal } from './Reveal'
+import { MiniParticles } from './MiniParticles'
 
 function LinkedInIcon() {
   return (
-    <svg className="contact__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M6.5 8.5h-3V21h3V8.5Zm-1.5-5a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 0 0 0-3.5ZM21 13.2c0-3.4-1.8-5-4.2-5-1.9 0-2.8 1-3.3 1.7V8.5H11V21h3.2v-5.8c0-1.3.9-2.6 2.6-2.6 1.8 0 2.2 1.4 2.2 2.8V21H21V13.2Z"
-        fill="currentColor"
-      />
+    <svg className="contact__icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M6.5 7.5a2 2 0 1 1 0 .01V7.5Zm-2 3.5h3V21H4.5V11Zm6 0h2.9v1.2h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.7V21h-3v-4.8c0-1.1 0-2.6-1.6-2.6-1.6 0-1.8 1.3-1.8 2.6V21h-3V11Z" />
     </svg>
   )
 }
@@ -15,12 +13,7 @@ function LinkedInIcon() {
 function MailIcon() {
   return (
     <svg className="contact__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 6h16v12H4V6Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
+      <path d="M4 6h16v12H4V6Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
@@ -36,19 +29,24 @@ export function Contact() {
         </Reveal>
 
         <div className="contact__actions">
-          <Reveal className="contact__card contact__card--primary">
-            <a href={site.linkedin} target="_blank" rel="noreferrer" className="contact__card-link">
-              <LinkedInIcon />
-              <span className="contact__card-label font-mono">{contact.linkedinCta}</span>
-              <span className="contact__card-sub font-mono">{site.linkedinDisplay}</span>
-            </a>
+          <Reveal>
+            <div className="contact__card contact__card--primary tilt-card">
+              <MiniParticles />
+              <a href={site.linkedin} target="_blank" rel="noreferrer" className="contact__card-link">
+                <LinkedInIcon />
+                <span className="contact__card-label font-mono">{contact.linkedinCta}</span>
+                <span className="contact__card-sub font-mono">{site.linkedinDisplay}</span>
+              </a>
+            </div>
           </Reveal>
-          <Reveal className="contact__card contact__card--secondary">
-            <a href={`mailto:${site.email}`} className="contact__card-link">
-              <MailIcon />
-              <span className="contact__card-label font-mono">{contact.emailCta}</span>
-              <span className="contact__card-sub font-mono">{site.email}</span>
-            </a>
+          <Reveal>
+            <div className="contact__card contact__card--secondary tilt-card">
+              <a href={`mailto:${site.email}`} className="contact__card-link">
+                <MailIcon />
+                <span className="contact__card-label font-mono">{contact.emailCta}</span>
+                <span className="contact__card-sub font-mono">{site.email}</span>
+              </a>
+            </div>
           </Reveal>
         </div>
       </div>

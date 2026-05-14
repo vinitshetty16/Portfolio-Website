@@ -1,9 +1,25 @@
-import { education, experience, experienceIntro, site } from '../content'
+import { useEffect, useRef } from 'react'
+import { experience, experienceIntro, site } from '../content'
 import { Reveal } from './Reveal'
 
 export function Experience() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const o = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) el.classList.add('experience--visible')
+      },
+      { threshold: 0.08 },
+    )
+    o.observe(el)
+    return () => o.disconnect()
+  }, [])
+
   return (
-    <section id="experience" className="section experience">
+    <section ref={sectionRef} id="experience" className="section experience">
       <div className="section__inner">
         <Reveal>
           <header className="section__head section__head--center">
@@ -16,48 +32,64 @@ export function Experience() {
           <div className="experience__rail" aria-hidden />
           <div className="experience__entries">
             {experience.map((job) => (
-              <Reveal key={job.company + job.date} className="experience-card">
-                <span className="experience-card__dot" aria-hidden />
-                <span className="experience-card__date font-mono">{job.date}</span>
-                <h3 className="experience-card__role font-display">
-                  {job.title} · {job.company}
-                </h3>
-                <p className="experience-card__narrative font-body">{job.narrative}</p>
-                <ul className="experience-card__outcomes font-body">
-                  {job.outcomes.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-                <ul className="experience-card__tools font-mono">
-                  {job.tools.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-              </Reveal>
+              <ExpCard key={job.company + job.date} job={job} />
             ))}
           </div>
         </div>
 
-        <Reveal>
-          <h3 className="experience__edu-title font-display">Education</h3>
-        </Reveal>
-        <div className="experience__edu-grid">
-          {education.map((ed) => (
-            <Reveal key={ed.title} className="experience-edu-card">
-              <span className="font-mono experience-edu-card__date">{ed.date}</span>
-              <h4 className="font-display experience-edu-card__title">{ed.title}</h4>
-              <p className="font-body experience-edu-card__school">{ed.school}</p>
-              <p className="font-mono experience-edu-card__note">{ed.note}</p>
-            </Reveal>
-          ))}
-        </div>
-
         <div className="experience__cv">
-          <a className="btn btn--primary" href={site.resumePdf} download>
+          <a className="btn-cv-sweep" href={site.resumePdf} download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M12 3v12M8 11l4 4 4-4M5 21h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             Download CV
           </a>
         </div>
       </div>
     </section>
+  )
+}
+
+function ExpCard({ job }: { job: (typeof experience)[0] }) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const o = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) el.classList.add('exp-card--visible')
+      },
+      { threshold: 0.12 },
+    )
+    o.observe(el)
+    return () => o.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className="exp-card tilt-card"
+      data-tilt-max="5"
+      data-watermark={job.company}
+    >
+      <span className="exp-card__accent" aria-hidden />
+      <span className="exp-card__dot" aria-hidden />
+      <span className="exp-card__date font-mono">{job.date}</span>
+      <h3 className="exp-card__role font-display">
+        {job.title} · {job.company}
+      </h3>
+      <p className="exp-card__narrative font-body">{job.narrative}</p>
+      <ul className="exp-card__outcomes font-body">
+        {job.outcomes.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
+      <ul className="exp-card__tools font-mono">
+        {job.tools.map((t) => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 
 export function ScrollProgress() {
-  const [p, setP] = useState(0)
+  const [pct, setPct] = useState(0)
 
   useEffect(() => {
     const onScroll = () => {
       const doc = document.documentElement
       const scroll = doc.scrollTop
       const height = doc.scrollHeight - doc.clientHeight
-      setP(height > 0 ? scroll / height : 0)
+      setPct(height > 0 ? (scroll / height) * 100 : 0)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -19,11 +19,11 @@ export function ScrollProgress() {
     <div
       className="scroll-progress"
       role="progressbar"
-      aria-valuenow={Math.round(p * 100)}
+      aria-valuenow={Math.round(pct)}
       aria-valuemin={0}
       aria-valuemax={100}
     >
-      <div className="scroll-progress__bar scroll-progress__bar--amber" style={{ transform: `scaleX(${p})` }} />
+      <div className="scroll-progress__fill" style={{ width: `${pct}%` }} />
     </div>
   )
 }

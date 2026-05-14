@@ -1,8 +1,9 @@
-import { skillCategories, type SkillCategory } from '../content'
+import { useRef } from 'react'
+import { skillCategories, skillCerts, skillsIntro, type SkillCategory } from '../content'
 import { Reveal } from './Reveal'
 
 function CategoryIcon({ icon }: { icon: SkillCategory['icon'] }) {
-  const common = { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: '#E8A020', strokeWidth: 1.4 }
+  const common = { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: '#3B82F6', strokeWidth: 1.4 }
   switch (icon) {
     case 'query':
       return (
@@ -44,28 +45,68 @@ export function Skills() {
         <Reveal>
           <header className="section__head section__head--center">
             <h2 className="section__title font-display">Skills</h2>
-            <p className="section__lead font-body">
-              Grouped the way hiring managers scan a CV — query layer, visual layer, platform layer, and what is next.
-            </p>
+            <p className="section__lead font-body">{skillsIntro}</p>
           </header>
         </Reveal>
 
         <div className="skills__grid">
           {skillCategories.map((cat) => (
-            <Reveal key={cat.name} className="skills__card" stagger>
-              <div className="skills__card-icon">
-                <CategoryIcon icon={cat.icon} />
-              </div>
-              <h3 className="skills__card-title font-display">{cat.name}</h3>
-              <ul className="skills__pills font-mono">
-                {cat.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
-            </Reveal>
+            <SkillCard key={cat.name} cat={cat} />
           ))}
         </div>
+
+        <Reveal>
+          <ul className="skills__certs font-mono">
+            {skillCerts.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
+  )
+}
+
+function SkillCard({ cat }: { cat: SkillCategory }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const glareRef = useRef<HTMLDivElement>(null)
+
+  const onMove = (e: React.MouseEvent) => {
+    const el = cardRef.current
+    const g = glareRef.current
+    if (!el || !g) return
+    const r = el.getBoundingClientRect()
+    const x = ((e.clientX - r.left) / r.width) * 100
+    const y = ((e.clientY - r.top) / r.height) * 100
+    g.style.left = `${x}%`
+    g.style.top = `${y}%`
+    g.style.opacity = '0.06'
+  }
+
+  const onLeave = () => {
+    const g = glareRef.current
+    if (g) g.style.opacity = '0'
+  }
+
+  return (
+    <Reveal>
+      <div
+        ref={cardRef}
+        className="skills__card tilt-card skills__card--3d"
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+      >
+        <div ref={glareRef} className="skills__glare" aria-hidden />
+        <div className="skills__card-icon">
+          <CategoryIcon icon={cat.icon} />
+        </div>
+        <h3 className="skills__card-title font-display">{cat.name}</h3>
+        <ul className="skills__pills font-mono">
+          {cat.tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
+      </div>
+    </Reveal>
   )
 }
