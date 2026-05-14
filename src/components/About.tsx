@@ -13,13 +13,33 @@ export function About() {
 
         <div className="about__grid">
           <Reveal>
-            <div className="about-photo">
+            <div
+              className="about-profile-slot"
+              style={{
+                width: '100%',
+                maxWidth: 320,
+                height: 360,
+                borderRadius: 16,
+                overflow: 'hidden',
+                position: 'relative',
+                border: '2px solid rgba(59, 130, 246, 0.4)',
+                margin: '0 auto',
+                boxSizing: 'border-box',
+              }}
+            >
               <img
                 src={about.photo}
                 alt="Vinit Shetty"
-                className="about-photo__img"
-                width={300}
-                height={380}
+                width={320}
+                height={360}
+                decoding="async"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  display: 'block',
+                }}
               />
             </div>
           </Reveal>

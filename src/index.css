@@ -516,7 +516,7 @@ body {
   }
 }
 
-/* About — plain photo frame (no oval mask, no decorative ring) */
+/* About — copy + chips only; profile frame is inline-styled in About.tsx */
 .about__grid {
   display: grid;
   gap: 2.5rem;
@@ -528,23 +528,9 @@ body {
     align-items: center;
   }
 }
-.about-photo {
-  width: 300px;
-  max-width: 100%;
-  height: 380px;
-  margin: 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(59, 130, 246, 0.18);
-  background: var(--card);
+/* Reveal wrapper: no radius/clip/mask — avoids any inherited frame on the photo */
+.about-profile-slot {
   flex-shrink: 0;
-}
-.about-photo__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
 }
 .about__lead {
   color: var(--muted);
