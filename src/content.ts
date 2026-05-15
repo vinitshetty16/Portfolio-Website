@@ -193,7 +193,7 @@ export const featuredProject: ProjectItem = {
   featured: true,
   banner: 'f1-car',
   title: 'F1 Race Analytics Pipeline',
-  href: 'https://github.com/vinitshetty16',
+  href: 'https://github.com/vinitshetty16/f1-race-performance-analytics',
   description:
     'End-to-end pipeline for 75 years of Formula 1 data (1950-2024) in Snowflake, with raw and analytics layers. SQL views for qualifying trends, reliability, and era comparisons. Live Power BI report with DAX and gen-AI checks against the underlying SQL.',
   tech: ['Snowflake', 'SQL', 'Power BI', 'DAX', 'Python', 'Generative AI'],
