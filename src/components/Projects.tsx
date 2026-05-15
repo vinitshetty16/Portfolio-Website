@@ -78,7 +78,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
 export function Projects() {
   return (
     <section id="projects" className="section section--alt projects">
-      <ParallaxLift rate={-0.022}>
+      <ParallaxLift maxPx={-14}>
         <div className="section__inner">
           <Reveal>
             <header className="section__head section__head--center">

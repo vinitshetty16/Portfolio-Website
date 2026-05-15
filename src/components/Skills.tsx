@@ -42,7 +42,7 @@ function CategoryIcon({ icon }: { icon: SkillCategory['icon'] }) {
 export function Skills() {
   return (
     <section id="skills" className="section skills">
-      <ParallaxLift rate={0.024}>
+      <ParallaxLift maxPx={14}>
         <div className="section__inner">
           <Reveal>
             <header className="section__head section__head--center">

@@ -23,7 +23,7 @@ function MailIcon() {
 export function Contact() {
   return (
     <section id="contact" className="section section--alt contact">
-      <ParallaxLift rate={0.02}>
+      <ParallaxLift maxPx={10}>
         <div className="section__inner contact__inner">
           <Reveal>
             <h2 className="contact__heading font-display">{contact.heading}</h2>

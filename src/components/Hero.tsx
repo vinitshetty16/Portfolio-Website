@@ -18,7 +18,7 @@ export function Hero() {
       <div className="hero__bg-grid" aria-hidden />
       <div className="hero__inner section__inner">
         <div className="hero__grid2">
-          <ParallaxLift rate={0.02}>
+          <ParallaxLift maxPx={14}>
             <div className="hero__copy">
               <p className="hero__eyebrow font-mono">{hero.eyebrow}</p>
               <h1 className="hero__headline font-display">{hero.headline}</h1>
@@ -34,7 +34,7 @@ export function Hero() {
               <p className="hero__seeking font-mono">{hero.seeking}</p>
             </div>
           </ParallaxLift>
-          <ParallaxLift rate={-0.026}>
+          <ParallaxLift maxPx={-14}>
             <div className="hero__dash-col">
               <HeroDashboard />
             </div>

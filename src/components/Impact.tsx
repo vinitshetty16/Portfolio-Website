@@ -5,7 +5,7 @@ import { Reveal } from './Reveal'
 export function Impact() {
   return (
     <section id="impact" className="section impact">
-      <ParallaxLift rate={0.014}>
+      <ParallaxLift maxPx={10}>
         <div className="section__inner">
           <div className="impact__grid">
             {impactCards.map((card) => (

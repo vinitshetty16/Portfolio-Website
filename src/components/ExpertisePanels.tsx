@@ -40,7 +40,7 @@ function Icon({ kind }: { kind: (typeof expertisePanels)[0]['icon'] }) {
 export function ExpertisePanels() {
   return (
     <section className="section section--alt expertise" aria-label="Areas of expertise">
-      <ParallaxLift rate={-0.018}>
+      <ParallaxLift maxPx={-10}>
         <div className="section__inner expertise__grid">
           {expertisePanels.map((p) => (
             <Reveal key={p.title} className="expertise-panel tilt-card">

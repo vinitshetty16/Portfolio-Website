@@ -21,7 +21,7 @@ export function Experience() {
 
   return (
     <section ref={sectionRef} id="experience" className="section experience">
-      <ParallaxLift rate={0.018}>
+      <ParallaxLift maxPx={12}>
         <div className="section__inner">
           <Reveal>
             <header className="section__head section__head--center">

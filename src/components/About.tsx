@@ -5,7 +5,7 @@ import { Reveal } from './Reveal'
 export function About() {
   return (
     <section id="about" className="section section--alt about">
-      <ParallaxLift rate={-0.02}>
+      <ParallaxLift maxPx={-12}>
         <div className="section__inner">
         <Reveal>
           <header className="section__head">
