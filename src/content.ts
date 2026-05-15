@@ -251,13 +251,13 @@ export const expertisePanels = [
     icon: 'db' as const,
   },
   {
-    title: 'Smart City Analytics',
-    body: 'Geospatial and behavioural data modelling for the City of Melbourne — forecasting infrastructure demand and visualising foot traffic patterns for public planning decisions.',
+    title: 'Business Problem Solving',
+    body: 'I start with what moves the business — revenue drivers, customer behaviour, operational bottlenecks — then apply the right logic in SQL and BI to answer it. Capstone work for Melbourne translated visitor and foot-traffic pain points into forecasts leadership could act on, not a standalone academic project.',
     icon: 'map' as const,
   },
   {
-    title: 'Inspection and Compliance',
-    body: "Regulated reporting for Victoria's building inspection sector — structured data pipelines and compliance-grade dashboards that give leadership audit-ready operational visibility.",
+    title: 'Reporting & Data Operations',
+    body: 'I map broken reporting workflows and data-quality gaps first, then rebuild pipelines and KPI packs stakeholders actually run the business on. In regulated, high-accountability environments that meant unifying fragmented sources into audit-ready dashboards for capacity, compliance, and day-to-day operations.',
     icon: 'clip' as const,
   },
   {
