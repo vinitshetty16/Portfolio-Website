@@ -252,12 +252,12 @@ export const expertisePanels = [
   },
   {
     title: 'Business Problem Solving',
-    body: 'I start with what moves the business — revenue drivers, customer behaviour, operational bottlenecks — then apply the right logic in SQL and BI to answer it. Capstone work for Melbourne translated visitor and foot-traffic pain points into forecasts leadership could act on, not a standalone academic project.',
+    body: 'I start with what moves the business — revenue drivers, customer behaviour, operational bottlenecks — then apply the right logic in SQL and BI to answer it.',
     icon: 'map' as const,
   },
   {
     title: 'Reporting & Data Operations',
-    body: 'I map broken reporting workflows and data-quality gaps first, then rebuild pipelines and KPI packs stakeholders actually run the business on. In regulated, high-accountability environments that meant unifying fragmented sources into audit-ready dashboards for capacity, compliance, and day-to-day operations.',
+    body: 'I map broken reporting workflows and data-quality gaps first, then rebuild pipelines and KPI packs that stakeholders actually run the business on.',
     icon: 'clip' as const,
   },
   {
