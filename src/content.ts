@@ -148,14 +148,6 @@ export const educationCards: EducationFlip[] = [
       'Machine Learning, Data Engineering, AI Ethics, Smart City Analytics Capstone — applied research translating sensor and behavioural data into forecasting models and geospatial visualisations.',
   },
   {
-    id: 'bachelors',
-    frontTitle: 'Bachelor of Engineering (Electronics)',
-    frontSchool: 'Mumbai University',
-    frontMeta: 'WAM 72/100',
-    backBody:
-      'Electronics systems, signal processing, and data systems fundamentals — the engineering discipline behind structured analytical thinking.',
-  },
-  {
     id: 'py',
     frontTitle: 'ACS Professional Year Program',
     frontSchool: 'Performance Education',
@@ -163,6 +155,14 @@ export const educationCards: EducationFlip[] = [
     backBody:
       'Australian Computer Society accredited programme for internationally qualified technology graduates — professional communications, workplace ethics, and industry project work.',
     pulse: true,
+  },
+  {
+    id: 'bachelors',
+    frontTitle: 'Bachelor of Engineering (Electronics)',
+    frontSchool: 'Mumbai University',
+    frontMeta: 'WAM 72/100',
+    backBody:
+      'Electronics systems, signal processing, and data systems fundamentals — the engineering discipline behind structured analytical thinking.',
   },
   {
     id: 'msft',
@@ -196,7 +196,7 @@ export const featuredProject: ProjectItem = {
   title: 'F1 Race Analytics Pipeline',
   href: 'https://github.com/vinitshetty16',
   description:
-    'An end-to-end analytics pipeline ingesting 70 years of Formula 1 race data — 1950 through 2024 — into Snowflake using a two-layer raw and analytics schema. Complex SQL views surface qualifying conversion rates, constructor failure patterns, and era-by-era championship dominance. Published as a 4-page interactive Power BI report with live Snowflake connectivity, advanced DAX measures, and Generative AI used to accelerate and validate insight generation.',
+    'An end-to-end analytics pipeline ingesting 75 years of Formula 1 race data — 1950 through 2024 — into Snowflake using a two-layer raw and analytics schema. Complex SQL views surface qualifying conversion rates, constructor failure patterns, and era-by-era championship dominance. Published as a 4-page interactive Power BI report with live Snowflake connectivity, advanced DAX measures, and Generative AI used to accelerate and validate insight generation.',
   tech: ['Snowflake', 'SQL', 'Power BI', 'DAX', 'Python', 'Generative AI'],
 }
 

@@ -43,8 +43,14 @@ export function HeroDashboard() {
         <div className={`hero-dash ${mounted ? 'hero-dash--bars-on' : ''}`} style={{ transformStyle: 'preserve-3d' }}>
           <div className="hero-dash__inner">
             <div className="hero-dash__kpis font-mono">
-              <span>↑ 40%</span>
-              <span>15+ Clients</span>
+              <div className="hero-dash__kpi">
+                <span className="hero-dash__kpi-value">↑ 40%</span>
+                <span className="hero-dash__kpi-label">faster reporting</span>
+              </div>
+              <div className="hero-dash__kpi">
+                <span className="hero-dash__kpi-value">15+</span>
+                <span className="hero-dash__kpi-label">enterprise clients</span>
+              </div>
             </div>
             <div className="hero-dash__chart">
               <svg className="hero-dash__spark" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden>
