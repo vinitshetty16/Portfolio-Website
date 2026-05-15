@@ -1,6 +1,7 @@
+import { useId } from 'react'
 import type { ProjectBanner } from '../content'
 
-/** Domain-specific banner art only — no abstract placeholders. */
+/** Domain-specific banner art — retail / city / HR / taxi cues, not generic shapes. */
 export function ProjectBannerSvg({
   kind,
   visible,
@@ -10,6 +11,7 @@ export function ProjectBannerSvg({
   visible: boolean
   boost?: boolean
 }) {
+  const rid = useId().replace(/:/g, '')
   const on = visible ? 'project-svg--on' : ''
   const boostClass = boost ? 'project-svg--boost' : ''
 
@@ -17,12 +19,12 @@ export function ProjectBannerSvg({
     return (
       <svg className={`project-svg project-svg--f1-car ${on} ${boostClass}`} viewBox="0 0 220 120" aria-hidden>
         <defs>
-          <linearGradient id="f1Track" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={`${rid}-f1Track`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stopColor="rgba(59,130,246,0.25)" />
             <stop offset="1" stopColor="rgba(8,11,20,0.4)" />
           </linearGradient>
         </defs>
-        <rect x="0" y="78" width="220" height="28" fill="url(#f1Track)" />
+        <rect x="0" y="78" width="220" height="28" fill={`url(#${rid}-f1Track)`} />
         <line x1="0" y1="86" x2="220" y2="86" stroke="rgba(96,165,250,0.35)" strokeWidth="1" strokeDasharray="10 14" />
         <g className="project-svg__f1-rig">
           <path
@@ -84,43 +86,77 @@ export function ProjectBannerSvg({
   }
 
   if (kind === 'bars') {
+    const gid = `${rid}-barG`
+    const heights = [55, 80, 48, 92, 65]
     return (
       <svg className={`project-svg project-svg--bars ${on}`} viewBox="0 0 200 120" aria-hidden>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <rect key={i} x={28 + i * 32} y={20} width="18" height="85" rx="2" fill="#1e293b" stroke="#334155" />
-        ))}
-        {[55, 80, 48, 92, 65].map((h, i) => (
-          <rect
-            key={`f-${i}`}
-            className="project-svg__bar-fill"
-            x={28 + i * 32}
-            y={105 - h * 0.85}
-            width="18"
-            height={h * 0.85}
-            rx="2"
-            fill="url(#barG)"
-            style={{ ['--bh' as string]: `${h * 0.85}px`, ['--i' as string]: `${i}` }}
-          />
-        ))}
         <defs>
-          <linearGradient id="barG" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
             <stop stopColor="#3B82F6" />
             <stop offset="1" stopColor="#1d4ed8" />
           </linearGradient>
         </defs>
+        <g className="project-svg__ww-logo" transform="translate(10, 14)">
+          <rect x="0" y="0" width="46" height="44" rx="8" fill="rgba(16,138,67,0.2)" stroke="#1a9f6e" strokeWidth="1.2" />
+          <path
+            fill="#23b872"
+            d="M8 38 L12 10 L18 26 L24 10 L30 38 L36 16 L42 38 L36 38 L32 22 L26 38 L20 22 L14 38 Z"
+          />
+          <circle cx="23" cy="8" r="3" fill="#fbbf24" opacity="0.9" />
+        </g>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <rect key={`bg-${i}`} x={62 + i * 26} y={22} width="16" height="78" rx="2" fill="#1e293b" stroke="#334155" />
+        ))}
+        {heights.map((h, i) => (
+          <rect
+            key={`f-${i}`}
+            className="project-svg__bar-fill"
+            x={62 + i * 26}
+            y={100 - h * 0.78}
+            width="16"
+            height={h * 0.78}
+            rx="2"
+            fill={`url(#${gid})`}
+            style={{ transitionDelay: `${i * 80}ms` }}
+          />
+        ))}
       </svg>
     )
   }
 
   if (kind === 'grid') {
-    const cells = Array.from({ length: 6 }, (_, r) =>
-      Array.from({ length: 8 }, (_, c) => (
-        <rect key={`${r}-${c}`} x={12 + c * 22} y={10 + r * 18} width="16" height="12" rx="2" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="1" />
+    const cells = Array.from({ length: 5 }, (_, r) =>
+      Array.from({ length: 9 }, (_, c) => (
+        <rect
+          key={`${r}-${c}`}
+          x={10 + c * 20}
+          y={8 + r * 16}
+          width="16"
+          height="12"
+          rx="1.5"
+          fill="none"
+          stroke="rgba(59,130,246,0.12)"
+          strokeWidth="1"
+        />
       )),
     ).flat()
     return (
       <svg className={`project-svg project-svg--grid ${on}`} viewBox="0 0 200 120" aria-hidden>
         {cells}
+        <g className="project-svg__city-skyline">
+          <rect x="8" y="52" width="14" height="58" fill="rgba(59,130,246,0.12)" stroke="rgba(96,165,250,0.25)" rx="1" />
+          <rect x="26" y="38" width="18" height="72" fill="rgba(59,130,246,0.15)" stroke="rgba(96,165,250,0.3)" rx="1" />
+          <rect x="48" y="44" width="12" height="66" fill="rgba(59,130,246,0.1)" stroke="rgba(96,165,250,0.2)" rx="1" />
+          <rect x="64" y="30" width="22" height="80" fill="rgba(59,130,246,0.18)" stroke="rgba(96,165,250,0.35)" rx="1" />
+          <rect x="90" y="48" width="16" height="62" fill="rgba(59,130,246,0.12)" stroke="rgba(96,165,250,0.25)" rx="1" />
+          <rect x="110" y="34" width="20" height="76" fill="rgba(59,130,246,0.16)" stroke="rgba(96,165,250,0.32)" rx="1" />
+          <rect x="134" y="50" width="14" height="60" fill="rgba(59,130,246,0.11)" stroke="rgba(96,165,250,0.22)" rx="1" />
+          <rect x="152" y="42" width="18" height="68" fill="rgba(59,130,246,0.14)" stroke="rgba(96,165,250,0.28)" rx="1" />
+          <rect x="174" y="56" width="18" height="54" fill="rgba(59,130,246,0.1)" stroke="rgba(96,165,250,0.2)" rx="1" />
+          {[20, 44, 72, 100, 128, 156].map((x, i) => (
+            <rect key={`win-${i}`} x={x} y="58" width="4" height="6" rx="0.5" fill="rgba(96,165,250,0.35)" />
+          ))}
+        </g>
         <circle className="project-svg__pulse-dot" cx="100" cy="58" r="6" fill="#3B82F6" opacity="0.85" />
         <circle className="project-svg__pulse-ring" cx="100" cy="58" r="10" fill="none" stroke="#60A5FA" strokeWidth="1" opacity="0.5" />
       </svg>
@@ -130,18 +166,32 @@ export function ProjectBannerSvg({
   if (kind === 'donut') {
     return (
       <svg className={`project-svg project-svg--donut ${on}`} viewBox="0 0 200 120" aria-hidden>
-        <circle cx="100" cy="60" r="38" fill="none" stroke="#1e293b" strokeWidth="14" />
+        <g className="project-svg__hr-people">
+          <g transform="translate(42, 22)">
+            <circle cx="0" cy="0" r="7" fill="none" stroke="#60A5FA" strokeWidth="1.4" />
+            <path d="M-9 14 Q0 8 9 14" fill="none" stroke="#60A5FA" strokeWidth="1.4" strokeLinecap="round" />
+          </g>
+          <g transform="translate(100, 18)">
+            <circle cx="0" cy="0" r="8" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+            <path d="M-10 16 Q0 9 10 16" fill="none" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" />
+          </g>
+          <g transform="translate(158, 22)">
+            <circle cx="0" cy="0" r="7" fill="none" stroke="#60A5FA" strokeWidth="1.4" />
+            <path d="M-9 14 Q0 8 9 14" fill="none" stroke="#60A5FA" strokeWidth="1.4" strokeLinecap="round" />
+          </g>
+        </g>
+        <circle cx="100" cy="68" r="32" fill="none" stroke="#1e293b" strokeWidth="12" />
         <circle
           className="project-svg__donut-arc"
           cx="100"
-          cy="60"
-          r="38"
+          cy="68"
+          r="32"
           fill="none"
           stroke="#3B82F6"
-          strokeWidth="14"
-          strokeDasharray="239"
-          strokeDashoffset="239"
-          transform="rotate(-90 100 60)"
+          strokeWidth="12"
+          strokeDasharray="201"
+          strokeDashoffset="201"
+          transform="rotate(-90 100 68)"
         />
       </svg>
     )
@@ -160,6 +210,18 @@ export function ProjectBannerSvg({
     ]
     return (
       <svg className={`project-svg project-svg--scatter ${on}`} viewBox="0 0 200 120" aria-hidden>
+        <g transform="translate(100, 52)">
+          <g className="project-svg__taxi-rig">
+            <rect x="-28" y="-14" width="56" height="22" rx="3" fill="#eab308" stroke="#ca8a04" strokeWidth="1.2" />
+            <rect x="-22" y="-20" width="20" height="8" rx="1" fill="#1e293b" stroke="#334155" />
+            <text x="0" y="-13" textAnchor="middle" fill="#fbbf24" fontSize="6" fontWeight="700" fontFamily="system-ui, sans-serif">
+              TAXI
+            </text>
+            <rect x="-30" y="6" width="60" height="4" rx="1" fill="#334155" opacity="0.85" />
+            <circle cx="-16" cy="12" r="5" fill="#0f172a" stroke="#475569" strokeWidth="1" />
+            <circle cx="16" cy="12" r="5" fill="#0f172a" stroke="#475569" strokeWidth="1" />
+          </g>
+        </g>
         {pts.map(([x, y], i) => (
           <circle key={i} className="project-svg__scatter-dot" cx={x} cy={y} r="4" fill="#60A5FA" style={{ ['--i' as string]: `${i}` }} />
         ))}

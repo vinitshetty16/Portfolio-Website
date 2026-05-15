@@ -70,7 +70,7 @@ export function Navbar() {
   return (
     <header ref={navRef} className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner">
-        <a href="#home" className="nav__brand font-mono" onClick={(e) => go(e, '#home')}>
+        <a href="#home" className="nav__brand font-display" onClick={(e) => go(e, '#home')}>
           {site.name}
         </a>
         <button
@@ -101,7 +101,7 @@ export function Navbar() {
               </a>
             ))}
           </nav>
-          <a className="nav__cv font-mono" href={site.resumePdf} download>
+          <a className="nav__cv" href={site.resumePdf} download>
             Download CV
           </a>
         </div>

@@ -65,10 +65,11 @@ export const skillCerts = [
   'Azure Data Fundamentals DP-900',
   'Azure AI Fundamentals AI-900',
   'SQL Gold — HackerRank',
+  'Microsoft Power Platform Fundamentals PL-900',
 ]
 
 export const skillsIntro =
-  'Four years across ERP, supply chain, and inspection analytics — these are the tools I use to solve real problems, not a list compiled for SEO.'
+  'Four years across ERP, supply chain, and inspection analytics — these are the tools I use to solve real problems.'
 
 export type ExperienceItem = {
   date: string
@@ -130,7 +131,8 @@ export type EducationFlip = {
   id: string
   frontTitle: string
   frontSchool: string
-  frontMeta: string
+  /** Optional extra line on the card front (dates avoided on purpose). */
+  frontMeta?: string
   backBody: string
   pulse?: boolean
   microsoft?: boolean
@@ -141,7 +143,7 @@ export const educationCards: EducationFlip[] = [
     id: 'masters',
     frontTitle: 'Master of Applied Artificial Intelligence',
     frontSchool: 'Deakin University',
-    frontMeta: '2021–2024 · WAM 75/100',
+    frontMeta: 'WAM 75/100',
     backBody:
       'Machine Learning, Data Engineering, AI Ethics, Smart City Analytics Capstone — applied research translating sensor and behavioural data into forecasting models and geospatial visualisations.',
   },
@@ -149,7 +151,7 @@ export const educationCards: EducationFlip[] = [
     id: 'bachelors',
     frontTitle: 'Bachelor of Engineering (Electronics)',
     frontSchool: 'Mumbai University',
-    frontMeta: '2013–2017 · WAM 72/100',
+    frontMeta: 'WAM 72/100',
     backBody:
       'Electronics systems, signal processing, and data systems fundamentals — the engineering discipline behind structured analytical thinking.',
   },
@@ -157,7 +159,7 @@ export const educationCards: EducationFlip[] = [
     id: 'py',
     frontTitle: 'ACS Professional Year Program',
     frontSchool: 'Performance Education',
-    frontMeta: 'Oct 2025 – Present · Current',
+    frontMeta: 'Australian Computer Society accredited pathway',
     backBody:
       'Australian Computer Society accredited programme for internationally qualified technology graduates — professional communications, workplace ethics, and industry project work.',
     pulse: true,
@@ -165,10 +167,10 @@ export const educationCards: EducationFlip[] = [
   {
     id: 'msft',
     frontTitle: 'Microsoft Certified',
-    frontSchool: 'PL-300 Power BI Associate',
-    frontMeta: 'DP-900 Data Fundamentals · AI-900 AI Fundamentals',
+    frontSchool: 'Power BI & Azure fundamentals',
+    frontMeta: 'Data, analytics, and AI associate-level stack',
     backBody:
-      'Power BI data modelling, DAX, Azure data fundamentals, and AI services — certified proficiency in the Microsoft analytics stack used across enterprise reporting environments.',
+      'PL-300 Power BI Associate, DP-900 Data Fundamentals, and AI-900 — Power BI data modelling, DAX, Azure data fundamentals, and AI services for enterprise reporting environments.',
     microsoft: true,
   },
 ]

@@ -1,4 +1,5 @@
 import { contact, site } from '../content'
+import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 import { MiniParticles } from './MiniParticles'
 
@@ -22,34 +23,36 @@ function MailIcon() {
 export function Contact() {
   return (
     <section id="contact" className="section section--alt contact">
-      <div className="section__inner contact__inner">
-        <Reveal>
-          <h2 className="contact__heading font-display">{contact.heading}</h2>
-          <p className="contact__body font-body">{contact.body}</p>
-        </Reveal>
+      <ParallaxLift rate={0.02}>
+        <div className="section__inner contact__inner">
+          <Reveal>
+            <h2 className="contact__heading font-display">{contact.heading}</h2>
+            <p className="contact__body font-body">{contact.body}</p>
+          </Reveal>
 
-        <div className="contact__actions">
-          <Reveal>
-            <div className="contact__card contact__card--primary tilt-card">
-              <MiniParticles />
-              <a href={site.linkedin} target="_blank" rel="noreferrer" className="contact__card-link">
-                <LinkedInIcon />
-                <span className="contact__card-label font-mono">{contact.linkedinCta}</span>
-                <span className="contact__card-sub font-mono">{site.linkedinDisplay}</span>
-              </a>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="contact__card contact__card--secondary tilt-card">
-              <a href={`mailto:${site.email}`} className="contact__card-link">
-                <MailIcon />
-                <span className="contact__card-label font-mono">{contact.emailCta}</span>
-                <span className="contact__card-sub font-mono">{site.email}</span>
-              </a>
-            </div>
-          </Reveal>
+          <div className="contact__actions">
+            <Reveal>
+              <div className="contact__card contact__card--primary tilt-card">
+                <MiniParticles />
+                <a href={site.linkedin} target="_blank" rel="noreferrer" className="contact__card-link">
+                  <LinkedInIcon />
+                  <span className="contact__card-label font-mono">{contact.linkedinCta}</span>
+                  <span className="contact__card-sub font-mono">{site.linkedinDisplay}</span>
+                </a>
+              </div>
+            </Reveal>
+            <Reveal>
+              <div className="contact__card contact__card--secondary tilt-card">
+                <a href={`mailto:${site.email}`} className="contact__card-link">
+                  <MailIcon />
+                  <span className="contact__card-label font-mono">{contact.emailCta}</span>
+                  <span className="contact__card-sub font-mono">{site.email}</span>
+                </a>
+              </div>
+            </Reveal>
+          </div>
         </div>
-      </div>
+      </ParallaxLift>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import { expertisePanels } from '../content'
+import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 
 function Icon({ kind }: { kind: (typeof expertisePanels)[0]['icon'] }) {
@@ -39,18 +40,20 @@ function Icon({ kind }: { kind: (typeof expertisePanels)[0]['icon'] }) {
 export function ExpertisePanels() {
   return (
     <section className="section section--alt expertise" aria-label="Areas of expertise">
-      <div className="section__inner expertise__grid">
-        {expertisePanels.map((p, i) => (
-          <Reveal key={p.title} className="expertise-panel tilt-card">
-            <div className="expertise-panel__accent" aria-hidden />
-            <div className="expertise-panel__icon">
-              <Icon kind={p.icon} />
-            </div>
-            <h3 className="expertise-panel__title font-display">{p.title}</h3>
-            <p className="expertise-panel__body font-body">{p.body}</p>
-          </Reveal>
-        ))}
-      </div>
+      <ParallaxLift rate={-0.018}>
+        <div className="section__inner expertise__grid">
+          {expertisePanels.map((p) => (
+            <Reveal key={p.title} className="expertise-panel tilt-card">
+              <div className="expertise-panel__accent" aria-hidden />
+              <div className="expertise-panel__icon">
+                <Icon kind={p.icon} />
+              </div>
+              <h3 className="expertise-panel__title font-display">{p.title}</h3>
+              <p className="expertise-panel__body font-body">{p.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </ParallaxLift>
     </section>
   )
 }

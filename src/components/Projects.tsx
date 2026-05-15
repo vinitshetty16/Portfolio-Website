@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { featuredProject, gridProjects, projectsIntro, secondaryProject } from '../content'
 import type { ProjectItem } from '../content'
+import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 import { ProjectBannerSvg } from './ProjectBannerSvg'
 
@@ -77,30 +78,32 @@ function ProjectCard({ project }: { project: ProjectItem }) {
 export function Projects() {
   return (
     <section id="projects" className="section section--alt projects">
-      <div className="section__inner">
-        <Reveal>
-          <header className="section__head section__head--center">
-            <h2 className="section__title font-display">Projects</h2>
-            <p className="section__lead font-body">{projectsIntro}</p>
-          </header>
-        </Reveal>
+      <ParallaxLift rate={-0.022}>
+        <div className="section__inner">
+          <Reveal>
+            <header className="section__head section__head--center">
+              <h2 className="section__title font-display">Projects</h2>
+              <p className="section__lead font-body">{projectsIntro}</p>
+            </header>
+          </Reveal>
 
-        <Reveal className="projects__featured">
-          <ProjectCard project={featuredProject} />
-        </Reveal>
+          <Reveal className="projects__featured">
+            <ProjectCard project={featuredProject} />
+          </Reveal>
 
-        <Reveal className="projects__secondary">
-          <ProjectCard project={secondaryProject} />
-        </Reveal>
+          <Reveal className="projects__secondary">
+            <ProjectCard project={secondaryProject} />
+          </Reveal>
 
-        <div className="projects__grid">
-          {gridProjects.map((p) => (
-            <Reveal key={p.href} className="projects__cell">
-              <ProjectCard project={p} />
-            </Reveal>
-          ))}
+          <div className="projects__grid">
+            {gridProjects.map((p) => (
+              <Reveal key={p.href} className="projects__cell">
+                <ProjectCard project={p} />
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </div>
+      </ParallaxLift>
     </section>
   )
 }

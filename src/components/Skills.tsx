@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { skillCategories, skillCerts, skillsIntro, type SkillCategory } from '../content'
+import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 
 function CategoryIcon({ icon }: { icon: SkillCategory['icon'] }) {
@@ -41,28 +42,30 @@ function CategoryIcon({ icon }: { icon: SkillCategory['icon'] }) {
 export function Skills() {
   return (
     <section id="skills" className="section skills">
-      <div className="section__inner">
-        <Reveal>
-          <header className="section__head section__head--center">
-            <h2 className="section__title font-display">Skills</h2>
-            <p className="section__lead font-body">{skillsIntro}</p>
-          </header>
-        </Reveal>
+      <ParallaxLift rate={0.024}>
+        <div className="section__inner">
+          <Reveal>
+            <header className="section__head section__head--center">
+              <h2 className="section__title font-display">Skills</h2>
+              <p className="section__lead font-body">{skillsIntro}</p>
+            </header>
+          </Reveal>
 
-        <div className="skills__grid">
-          {skillCategories.map((cat) => (
-            <SkillCard key={cat.name} cat={cat} />
-          ))}
-        </div>
-
-        <Reveal>
-          <ul className="skills__certs font-mono">
-            {skillCerts.map((c) => (
-              <li key={c}>{c}</li>
+          <div className="skills__grid">
+            {skillCategories.map((cat) => (
+              <SkillCard key={cat.name} cat={cat} />
             ))}
-          </ul>
-        </Reveal>
-      </div>
+          </div>
+
+          <Reveal>
+            <ul className="skills__certs font-mono">
+              {skillCerts.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </ParallaxLift>
     </section>
   )
 }

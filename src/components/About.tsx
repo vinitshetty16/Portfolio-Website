@@ -1,10 +1,12 @@
 import { about } from '../content'
+import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 
 export function About() {
   return (
     <section id="about" className="section section--alt about">
-      <div className="section__inner">
+      <ParallaxLift rate={-0.02}>
+        <div className="section__inner">
         <Reveal>
           <header className="section__head">
             <h2 className="section__title font-display">{about.title}</h2>
@@ -29,7 +31,8 @@ export function About() {
             </ul>
           </Reveal>
         </div>
-      </div>
+        </div>
+      </ParallaxLift>
     </section>
   )
 }
