@@ -67,7 +67,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
         <p className="project-card__desc font-body">{project.description}</p>
         <div className="project-card__link-wrap">
           <a className="project-card__link font-mono" href={project.href} target="_blank" rel="noreferrer">
-            View project →
+            View project
           </a>
         </div>
       </div>

@@ -44,7 +44,7 @@ export function HeroDashboard() {
           <div className="hero-dash__inner">
             <div className="hero-dash__kpis font-mono">
               <div className="hero-dash__kpi">
-                <span className="hero-dash__kpi-value">↑ 40%</span>
+                <span className="hero-dash__kpi-value">+40%</span>
                 <span className="hero-dash__kpi-label">faster reporting</span>
               </div>
               <div className="hero-dash__kpi">

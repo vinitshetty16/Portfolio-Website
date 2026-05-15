@@ -75,7 +75,7 @@ function ExpCard({ job }: { job: (typeof experience)[0] }) {
       <span className="exp-card__dot" aria-hidden />
       <span className="exp-card__date font-mono">{job.date}</span>
       <h3 className="exp-card__role font-display">
-        {job.title} · {job.company}
+        {job.title}, {job.company}
       </h3>
       <p className="exp-card__narrative font-body">{job.narrative}</p>
       <ul className="exp-card__outcomes font-body">
