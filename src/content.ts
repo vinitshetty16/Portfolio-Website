@@ -179,7 +179,7 @@ export const projectsIntro =
   'Decision-grade analytics: each build connects data to a business outcome — capacity, margin, compliance, or revenue — not charts for their own sake.'
 
 /** Each value maps to a domain-obvious banner (no abstract geometry). */
-export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter' | 'recycle'
+export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter'
 
 export type ProjectItem = {
   title: string

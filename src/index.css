@@ -1192,22 +1192,6 @@ body {
   }
 }
 
-/* Recycling / waste — bin icon (use banner: recycle on project cards) */
-.project-svg--recycle .project-svg__recycle-bin {
-  transform-origin: 0 12px;
-}
-.project-svg--recycle.project-svg--on .project-svg__recycle-bin {
-  animation: recycleBinSpin 12s linear infinite;
-}
-@keyframes recycleBinSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* Project banner SVGs — bars, grid, donut, scatter */
 .project-svg--bars .project-svg__bar-fill {
   transform: scaleX(0);

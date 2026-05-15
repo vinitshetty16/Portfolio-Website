@@ -64,27 +64,6 @@ export function ProjectBannerSvg({
     )
   }
 
-  if (kind === 'recycle') {
-    return (
-      <svg className={`project-svg project-svg--recycle ${on}`} viewBox="0 0 200 120" aria-hidden>
-        <g transform="translate(100,58)">
-          <g className="project-svg__recycle-bin">
-            <path
-              fill="none"
-              stroke="#3B82F6"
-              strokeWidth="2.2"
-              strokeLinejoin="round"
-              d="M-26 32 L-30 6 L30 6 L26 32 Z"
-            />
-            <path fill="none" stroke="#60A5FA" strokeWidth="2" d="M-22 6 L-18 -18 L18 -18 L22 6" />
-            <rect x="-18" y="10" width="36" height="38" rx="3" fill="rgba(15,20,32,0.6)" stroke="#60A5FA" strokeWidth="1.5" />
-            <line x1="0" y1="16" x2="0" y2="42" stroke="#334155" strokeWidth="1.5" strokeLinecap="round" />
-          </g>
-        </g>
-      </svg>
-    )
-  }
-
   if (kind === 'bars') {
     const gid = `${rid}-barG`
     const heights = [55, 80, 48, 92, 65]
