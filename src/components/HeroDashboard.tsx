@@ -44,8 +44,8 @@ export function HeroDashboard() {
           <div className="hero-dash__inner">
             <div className="hero-dash__kpis font-mono">
               <div className="hero-dash__kpi">
-                <span className="hero-dash__kpi-value">+40%</span>
-                <span className="hero-dash__kpi-label">faster reporting</span>
+                <span className="hero-dash__kpi-value hero-dash__kpi-value--clients">Tesla · GM · Ford · Toyota</span>
+                <span className="hero-dash__kpi-label">Enterprise clients supported</span>
               </div>
               <div className="hero-dash__kpi">
                 <span className="hero-dash__kpi-value">15+</span>

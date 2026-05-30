@@ -10,11 +10,12 @@ export const site = {
 }
 
 export const hero = {
-  eyebrow: 'DATA ANALYST | MELBOURNE | ONSITE, HYBRID AND REMOTE',
-  headline: 'I turn messy data into decisions that move businesses.',
+  eyebrow: 'REPORTING & BI ANALYST | ERP · SUPPLY CHAIN · OPERATIONS ANALYTICS | MELBOURNE',
+  headline: 'I turn fragmented operational data into reporting leaders trust.',
   subheading:
-    'Four years inside reporting for Fortune 500 supply chains and enterprise ERP teams. I build the SQL, Power BI dashboards, and automated workflows leaders use every week.',
-  seeking: 'Open to Data Analyst, Power BI Developer, and Supply Chain Analyst roles in Victoria and NSW.',
+    'Four years building Power BI dashboards, SQL pipelines, and ERP reporting models for Fortune 500 manufacturing and FMCG clients including Tesla, GM, Ford, and Toyota.',
+  seeking:
+    'Open to Reporting & BI Analyst, ERP Analyst, and Supply Chain Analyst roles across Melbourne and Victoria.',
   ctaPrimary: 'View My Work',
   ctaSecondary: 'Download CV',
 }
@@ -23,15 +24,15 @@ export const about = {
   photo: assetUrl('images/about-me.jpeg'),
   title: 'About',
   lead:
-    "I am a Data Analyst with four years of experience and a Master's in Applied AI. Most of my work sits in the reporting layer: SQL, Power BI, and the pipelines that feed them. At Thirdware I supported procurement and supply chain analytics across 15-plus Fortune 500 accounts. At GWMI I rebuilt reporting from scattered spreadsheets into one audit-ready data layer. I care about numbers that match operations, not just numbers that look right on a slide.",
+    'Reporting & BI Analyst with four years of experience across automotive, manufacturing, and FMCG industries. At Thirdware Solutions, developed Power BI dashboards, SQL scripts, and ERP reporting models as part of consulting teams on projects involving Tesla, GM, Ford, and Toyota. Currently responsible for KPI reporting and data consolidation across two business units at GWMI Group. Microsoft PL-300 certified with a Master of Applied Artificial Intelligence from Deakin University.',
   focusLabel: 'Currently seeking',
   focusValue:
-    'Data Analyst, Power BI Developer, or Supply Chain Analyst in Victoria or NSW. Available with two weeks notice. Full Australian work rights.',
-  statChips: ['4 YEARS EXPERIENCE', 'PL-300 CERTIFIED', "MASTER'S IN APPLIED AI", 'MELBOURNE VIC', 'FULL WORK RIGHTS'],
+    'Reporting & BI Analyst, ERP Analyst, or Supply Chain Analyst across Melbourne and Victoria. Available with two weeks notice.',
+  statChips: ['4 YEARS EXPERIENCE', 'PL-300 CERTIFIED', "MASTER'S IN APPLIED AI", 'MELBOURNE VIC', 'ERP & SUPPLY CHAIN FOCUS'],
 }
 
 export type SkillCategory = {
-  icon: 'query' | 'viz' | 'cloud' | 'ai'
+  icon: 'query' | 'viz' | 'cloud' | 'cert'
   name: string
   tags: string[]
 }
@@ -39,36 +40,39 @@ export type SkillCategory = {
 export const skillCategories: SkillCategory[] = [
   {
     icon: 'query',
-    name: 'Data & Querying',
-    tags: ['SQL', 'Python', 'Excel', 'Statistics', 'Data Modelling', 'ETL', 'EDA'],
+    name: 'Technical',
+    tags: ['SQL', 'Python', 'DAX', 'PostgreSQL', 'Data Modelling', 'Snowflake', 'Azure'],
   },
   {
     icon: 'viz',
-    name: 'Visualisation and BI',
-    tags: ['Power BI', 'DAX', 'Power Query', 'Tableau', 'KPI Reporting'],
+    name: 'Tools & Platforms',
+    tags: ['Power BI', 'Power BI Service', 'Azure Data Studio', 'ERP Systems', 'Git', 'Jira', 'Excel'],
   },
   {
     icon: 'cloud',
-    name: 'Cloud & Platforms',
-    tags: ['Snowflake', 'Azure', 'Git', 'Jira', 'ERP Systems'],
+    name: 'Domain',
+    tags: [
+      'Supply Chain Analytics',
+      'ERP Reporting',
+      'Inventory Management',
+      'Procurement Analytics',
+      'KPI Reporting',
+      'Financial Reporting',
+    ],
   },
   {
-    icon: 'ai',
-    name: 'AI & Emerging',
-    tags: ['Generative AI', 'LLMs', 'Azure ML', 'Machine Learning Pipelines'],
+    icon: 'cert',
+    name: 'Certifications',
+    tags: [
+      'Microsoft PL-300 Power BI Associate',
+      'Azure DP-900 Data Fundamentals',
+      'Azure AI-900 AI Fundamentals',
+    ],
   },
-]
-
-export const skillCerts = [
-  'Microsoft PL-300 Power BI Associate',
-  'Azure Data Fundamentals DP-900',
-  'Azure AI Fundamentals AI-900',
-  'SQL Gold, HackerRank',
-  'Microsoft Power Platform Fundamentals PL-900',
 ]
 
 export const skillsIntro =
-  'Tools I use daily across ERP, supply chain, and reporting work. Nothing here is filler for a keyword list.'
+  'Technical stack, platforms, and domain focus for ERP, supply chain, and operational reporting work.'
 
 export type ExperienceItem = {
   date: string
@@ -80,7 +84,7 @@ export type ExperienceItem = {
 }
 
 export const experienceIntro =
-  'Four years turning operational data into reporting leaders trust. ERP, enterprise scale, and regulated environments where errors are costly.'
+  'Four years building reporting and BI for manufacturing, automotive, and operations teams where data quality directly affects decisions.'
 
 export const experience: ExperienceItem[] = [
   {
@@ -88,41 +92,41 @@ export const experience: ExperienceItem[] = [
     title: 'Data Reporting Analyst',
     company: 'GWMI Group',
     narrative:
-      'GWMI runs compliance-heavy operations across Geelong and western Melbourne. I own the reporting stack: ingesting messy inputs, cleaning them in SQL, and publishing Power BI packs for capacity planning and day-to-day KPIs.',
+      'GWMI runs compliance-heavy operations across Geelong and western Melbourne. Responsible for end-to-end operational KPI reporting serving finance and operations teams across two business units.',
     outcomes: [
-      '20% better data accuracy after merging fragmented sources into one master dataset',
-      'Weekly, monthly, and quarterly dashboards became the main planning tool for senior leadership',
-      'SQL workflows gave same-day KPI visibility across scheduling and reporting cycles',
-      'Removed manual reconciliation across reporting cycles in a regulated setting',
+      'Built and maintained operational KPI reports in Excel, powered by MySQL queries extracting data from internal databases and client portals',
+      'Developed structured MySQL queries to consolidate client portal data into Excel reporting templates used by senior management',
+      'Improved data accuracy by 20% by unifying data across multiple sources into a single master dataset',
+      'Responsible for all ad-hoc analytical requests from senior management, consistently delivering insights within a 24-hour turnaround',
     ],
-    tools: ['SQL', 'Power BI', 'Excel', 'Power Query', 'PivotTables', 'Data Cleaning', 'Stakeholder Reporting'],
+    tools: ['SQL', 'MySQL', 'Excel', 'Power Query', 'Data Cleaning', 'Stakeholder Reporting'],
   },
   {
     date: '2019 - 2021',
     title: 'ERP Data Analyst',
     company: 'Thirdware Solutions',
     narrative:
-      'Thirdware (Tech Mahindra Group) delivers ERP programmes for large manufacturers and retailers. I was the analytics contact on 15-plus accounts: data models, SQL extracts, and Power BI dashboards that replaced weeks of manual reconciliation with a scheduled refresh.',
+      'Thirdware Solutions (Tech Mahindra Group) delivers ERP programmes for large manufacturers and retailers. Worked as part of consulting teams on projects involving Tesla, GM, Ford, and Toyota across production, procurement, and inventory operations.',
     outcomes: [
-      '40% faster reporting through automated ERP extract and reconciliation workflows',
-      '15+ Fortune 500 clients supported across automotive and manufacturing supply chains',
-      'Power BI dashboards for live procurement and inventory KPIs',
-      'Helped speed e-commerce rollout reporting across the client portfolio',
+      'Developed Power BI dashboards and automated SQL scripts to extract and transform ERP data across production, procurement, and inventory operations',
+      'Built new ERP reporting datasets and enhanced existing reporting models across 15+ client engagements',
+      'Presented dashboard demonstrations and analytical findings directly to client stakeholders across manufacturing and FMCG operations',
+      'Contributed to KPI definition and reporting framework discussions with client operations teams',
     ],
-    tools: ['Power BI', 'SQL', 'ERP Reporting', 'DAX', 'Inventory Optimisation', 'Stakeholder Reporting'],
+    tools: ['Power BI', 'SQL', 'ERP Reporting', 'DAX', 'Inventory Analytics', 'Stakeholder Reporting'],
   },
   {
     date: '2018 - 2019',
     title: 'ERP Software Engineer',
     company: 'Thirdware Solutions',
     narrative:
-      'Built the SQL extraction and validation jobs analyst teams relied on. Automated queries and Excel templates became the baseline for client procurement and inventory reporting.',
+      'Configured and maintained ERP inventory and EDI modules for enterprise automotive and manufacturing clients, supporting procurement and supply chain workflows.',
     outcomes: [
-      '20% less manual effort through automated ERP extraction pipelines',
-      'Reporting templates adopted as daily tools across multiple client teams',
-      'Worked with senior consultants to fix complex ERP workflow issues on deadline',
+      'Configured, customised, and maintained ERP inventory and EDI modules for 3-4 enterprise automotive and manufacturing clients',
+      'Developed SQL scripts to extract and transform ERP inventory and EDI data',
+      'Gathered requirements from business users and functional consultants, implemented ERP configuration changes, and validated system behaviour against client operational needs',
     ],
-    tools: ['SQL', 'Excel', 'ERP Systems', 'Data Extraction', 'Process Automation'],
+    tools: ['SQL', 'ERP Systems', 'EDI', 'Data Extraction', 'Process Automation'],
   },
 ]
 
@@ -130,7 +134,6 @@ export type EducationFlip = {
   id: string
   frontTitle: string
   frontSchool: string
-  /** Optional extra line on the card front (dates avoided on purpose). */
   frontMeta?: string
   backBody: string
   pulse?: boolean
@@ -147,37 +150,17 @@ export const educationCards: EducationFlip[] = [
       'Coursework in machine learning, data engineering, AI ethics, and a smart-city capstone. Research work turned sensor and behavioural data into forecasts and maps stakeholders could use.',
   },
   {
-    id: 'py',
-    frontTitle: 'ACS Professional Year Program',
-    frontSchool: 'Performance Education',
-    frontMeta: 'Australian Computer Society accredited pathway',
-    backBody:
-      'ACS programme for internationally qualified tech graduates: workplace communication, ethics, and an industry project.',
-    pulse: true,
-  },
-  {
     id: 'bachelors',
     frontTitle: 'Bachelor of Engineering (Electronics)',
-    frontSchool: 'Mumbai University',
-    frontMeta: 'WAM 72/100',
+    frontSchool: 'University of Mumbai, India',
     backBody:
-      'Electronics, signal processing, and data systems. Good foundation for structured problem solving in analytics.',
-  },
-  {
-    id: 'msft',
-    frontTitle: 'Microsoft Certified',
-    frontSchool: 'Power BI and Azure fundamentals',
-    frontMeta: 'Data, analytics, and AI associate-level stack',
-    backBody:
-      'PL-300 Power BI Associate, DP-900 Data Fundamentals, and AI-900. Covers modelling, DAX, Azure data services, and AI tools used in enterprise reporting.',
-    microsoft: true,
+      'Electronics, signal processing, and data systems. Strong foundation for structured problem solving in analytics and ERP.',
   },
 ]
 
 export const projectsIntro =
-  'Each project ties analysis to a business outcome: capacity, margin, compliance, or revenue. Not charts for their own sake.'
+  'Reporting and analytics builds across supply chain, ERP operations, and enterprise data. Select a project below or browse the carousel.'
 
-/** Each value maps to a domain-obvious banner (no abstract geometry). */
 export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter'
 
 export type ProjectItem = {
@@ -189,26 +172,40 @@ export type ProjectItem = {
   banner: ProjectBanner
 }
 
-export const featuredProject: ProjectItem = {
-  featured: true,
-  banner: 'f1-car',
-  title: 'F1 Race Analytics Pipeline',
-  href: 'https://github.com/vinitshetty16/f1-race-performance-analytics',
-  description:
-    'End-to-end pipeline for 75 years of Formula 1 data (1950-2024) in Snowflake, with raw and analytics layers. SQL views for qualifying trends, reliability, and era comparisons. Live Power BI report with DAX and gen-AI checks against the underlying SQL.',
-  tech: ['Snowflake', 'SQL', 'Power BI', 'DAX', 'Python', 'Generative AI'],
-}
-
-export const secondaryProject: ProjectItem = {
-  banner: 'afl-oval',
-  title: 'Australian Football League Insights (Power BI)',
-  href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
-  description:
-    'Star-schema model over 6,416 player-game rows. Custom DAX for efficiency, rolling form, and opponent benchmarks. Drill-through dashboards for results, attendance, and player stats on Power BI Service.',
-  tech: ['Power BI', 'DAX', 'Star Schema', 'Power BI Service'],
-}
-
-export const gridProjects: ProjectItem[] = [
+export const projects: ProjectItem[] = [
+  {
+    banner: 'bars',
+    title: 'Supply Chain Performance Analytics',
+    href: 'https://github.com/vinitshetty16',
+    description:
+      'End-to-end supply chain analytics solution ingesting 180,000+ transactional records into PostgreSQL with a star schema design. Built SQL reporting views analysing on-time delivery rates, shipping mode performance, and regional delay patterns across 5 global markets and 40+ product categories. Identified that 54% of orders were late, with Standard Class shipping and specific regional markets driving the majority of delays. Surfaced through a Power BI dashboard published to Power BI Service.',
+    tech: ['PostgreSQL', 'Python', 'Power BI', 'SQL', 'DAX'],
+  },
+  {
+    banner: 'donut',
+    title: 'ERP Operations & Procurement Reporting',
+    href: 'https://github.com/vinitshetty16',
+    description:
+      'ERP-style operational reporting solution covering procurement, inventory, and order fulfilment data across three years of transactional history. Designed a star schema with SQL views tracking 12 operational KPIs including inventory turnover, purchase order cycle times, and order fulfilment rates. Built a multi-page Power BI report with DAX measures for procurement efficiency and inventory health. Replaced a manual Excel-based monthly reporting process, reducing reporting preparation from 3 days to near real-time delivery.',
+    tech: ['PostgreSQL', 'Power BI', 'DAX', 'Excel'],
+  },
+  {
+    featured: true,
+    banner: 'f1-car',
+    title: 'F1 Race Analytics Pipeline',
+    href: 'https://github.com/vinitshetty16/f1-race-performance-analytics',
+    description:
+      'End-to-end pipeline for 75 years of Formula 1 data (1950-2024) in Snowflake, with raw and analytics layers. SQL views for qualifying trends, reliability, and era comparisons. Live Power BI report with DAX measures on Power BI Service.',
+    tech: ['Snowflake', 'SQL', 'Power BI', 'DAX', 'Python'],
+  },
+  {
+    banner: 'afl-oval',
+    title: 'Australian Football League Insights (Power BI)',
+    href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
+    description:
+      'Star-schema model over 6,416 player-game rows. Custom DAX for efficiency, rolling form, and opponent benchmarks. Drill-through dashboards for results, attendance, and player stats on Power BI Service.',
+    tech: ['Power BI', 'DAX', 'Star Schema', 'Power BI Service'],
+  },
   {
     banner: 'bars',
     title: 'Woolworths Product & Sales Insights (SQL)',
@@ -269,7 +266,7 @@ export const expertisePanels = [
 export const contact = {
   heading: "Let's connect.",
   body:
-    'Looking for Data Analyst, Power BI Developer, or Supply Chain Analyst roles in Victoria and NSW. Available in two weeks with full work rights. Fastest way to reach me is LinkedIn.',
+    'Open to Reporting & BI Analyst, ERP Analyst, and Supply Chain Analyst roles across Melbourne and Victoria. Available with two weeks notice.',
   linkedinCta: 'Connect on LinkedIn',
   emailCta: 'Send an Email',
 }

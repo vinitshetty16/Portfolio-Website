@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react'
-import { featuredProject, gridProjects, projectsIntro, secondaryProject } from '../content'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
+import { projects, projectsIntro } from '../content'
 import type { ProjectItem } from '../content'
 import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
@@ -76,6 +76,40 @@ function ProjectCard({ project }: { project: ProjectItem }) {
 }
 
 export function Projects() {
+  const [active, setActive] = useState(0)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  const scrollTo = useCallback((index: number) => {
+    const i = Math.max(0, Math.min(projects.length - 1, index))
+    setActive(i)
+    slideRefs.current[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+  }, [])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const onScroll = () => {
+      const center = track.scrollLeft + track.clientWidth / 2
+      let closest = 0
+      let minDist = Infinity
+      slideRefs.current.forEach((slide, idx) => {
+        if (!slide) return
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2
+        const dist = Math.abs(center - slideCenter)
+        if (dist < minDist) {
+          minDist = dist
+          closest = idx
+        }
+      })
+      setActive(closest)
+    }
+
+    track.addEventListener('scroll', onScroll, { passive: true })
+    return () => track.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <section id="projects" className="section section--alt projects">
       <ParallaxLift maxPx={-14}>
@@ -87,21 +121,59 @@ export function Projects() {
             </header>
           </Reveal>
 
-          <Reveal className="projects__featured">
-            <ProjectCard project={featuredProject} />
-          </Reveal>
+          <Reveal className="projects-carousel">
+            <nav className="projects-carousel__menu" aria-label="Project navigation">
+              {projects.map((p, i) => (
+                <button
+                  key={p.title}
+                  type="button"
+                  className={`projects-carousel__tab font-mono ${active === i ? 'is-active' : ''}`}
+                  onClick={() => scrollTo(i)}
+                  aria-current={active === i ? 'true' : undefined}
+                >
+                  {p.title}
+                </button>
+              ))}
+            </nav>
 
-          <Reveal className="projects__secondary">
-            <ProjectCard project={secondaryProject} />
-          </Reveal>
+            <div className="projects-carousel__controls">
+              <button
+                type="button"
+                className="projects-carousel__btn font-mono"
+                onClick={() => scrollTo(active - 1)}
+                disabled={active === 0}
+                aria-label="Previous project"
+              >
+                Prev
+              </button>
+              <span className="projects-carousel__count font-mono">
+                {active + 1} / {projects.length}
+              </span>
+              <button
+                type="button"
+                className="projects-carousel__btn font-mono"
+                onClick={() => scrollTo(active + 1)}
+                disabled={active === projects.length - 1}
+                aria-label="Next project"
+              >
+                Next
+              </button>
+            </div>
 
-          <div className="projects__grid">
-            {gridProjects.map((p) => (
-              <Reveal key={p.href} className="projects__cell">
-                <ProjectCard project={p} />
-              </Reveal>
-            ))}
-          </div>
+            <div ref={trackRef} className="projects-carousel__track">
+              {projects.map((p, i) => (
+                <div
+                  key={p.title}
+                  ref={(el) => {
+                    slideRefs.current[i] = el
+                  }}
+                  className={`projects-carousel__slide ${active === i ? 'is-active' : ''}`}
+                >
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </ParallaxLift>
     </section>

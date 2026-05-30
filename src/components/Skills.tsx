@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { skillCategories, skillCerts, skillsIntro, type SkillCategory } from '../content'
+import { skillCategories, skillsIntro, type SkillCategory } from '../content'
 import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 
@@ -26,12 +26,10 @@ function CategoryIcon({ icon }: { icon: SkillCategory['icon'] }) {
           <path d="M6 18h12a4 4 0 0 0 0-8 5.5 5.5 0 0 0-10.7-1.5A3.5 3.5 0 0 0 6 18Z" />
         </svg>
       )
-    case 'ai':
+    case 'cert':
       return (
         <svg {...common}>
-          <circle cx="9" cy="10" r="2.5" />
-          <circle cx="15" cy="10" r="2.5" />
-          <path d="M7 16c1.2 1.5 3 2.5 5 2.5s3.8-1 5-2.5" strokeLinecap="round" />
+          <path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.8 6.2 18l.9-5.4-3.9-3.8 5.4-.8L12 3Z" strokeLinejoin="round" />
         </svg>
       )
     default:
@@ -56,14 +54,6 @@ export function Skills() {
               <SkillCard key={cat.name} cat={cat} />
             ))}
           </div>
-
-          <Reveal>
-            <ul className="skills__certs font-mono">
-              {skillCerts.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </Reveal>
         </div>
       </ParallaxLift>
     </section>
