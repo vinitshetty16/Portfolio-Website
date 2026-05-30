@@ -161,20 +161,20 @@ export const educationCards: EducationFlip[] = [
 export const projectsIntro =
   'Eight builds across supply chain, ERP, and BI. Use the arrows, tap a side card, or pick a project below.'
 
-export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter'
-
 export type ProjectItem = {
   title: string
   href: string
   description: string
   tech: string[]
   featured?: boolean
-  banner: ProjectBanner
+  image: string
+  imageAlt: string
 }
 
 export const projects: ProjectItem[] = [
   {
-    banner: 'bars',
+    image: assetUrl('images/projects/supply-chain-analytics.png'),
+    imageAlt: 'Supply chain analytics dashboard with global shipping routes and on-time delivery KPIs',
     title: 'Supply Chain Performance Analytics',
     href: 'https://github.com/vinitshetty16',
     description:
@@ -182,7 +182,8 @@ export const projects: ProjectItem[] = [
     tech: ['PostgreSQL', 'Python', 'Power BI', 'SQL', 'DAX'],
   },
   {
-    banner: 'donut',
+    image: assetUrl('images/projects/erp-procurement-reporting.png'),
+    imageAlt: 'ERP procurement and inventory analytics dashboard with operational KPI gauges',
     title: 'ERP Operations & Procurement Reporting',
     href: 'https://github.com/vinitshetty16',
     description:
@@ -191,7 +192,8 @@ export const projects: ProjectItem[] = [
   },
   {
     featured: true,
-    banner: 'f1-car',
+    image: assetUrl('images/projects/f1-race-analytics.png'),
+    imageAlt: 'Formula 1 race car on track with telemetry and lap analytics overlays',
     title: 'F1 Race Analytics Pipeline',
     href: 'https://github.com/vinitshetty16/f1-race-performance-analytics',
     description:
@@ -199,7 +201,8 @@ export const projects: ProjectItem[] = [
     tech: ['Snowflake', 'SQL', 'Power BI', 'DAX', 'Python'],
   },
   {
-    banner: 'afl-oval',
+    image: assetUrl('images/projects/afl-insights-powerbi.png'),
+    imageAlt: 'Australian rules football stadium with sports performance analytics dashboard overlay',
     title: 'Australian Football League Insights (Power BI)',
     href: 'https://github.com/vinitshetty16/AFL-Insights-PowerBI',
     description:
@@ -207,7 +210,8 @@ export const projects: ProjectItem[] = [
     tech: ['Power BI', 'DAX', 'Star Schema', 'Power BI Service'],
   },
   {
-    banner: 'bars',
+    image: assetUrl('images/projects/woolworths-sales-insights.png'),
+    imageAlt: 'Retail grocery sales analytics dashboard with SKU and category performance charts',
     title: 'Woolworths Product & Sales Insights (SQL)',
     href: 'https://github.com/vinitshetty16/Woolworths-Product-And-Sales-Insights-Using-SQL',
     description:
@@ -215,7 +219,8 @@ export const projects: ProjectItem[] = [
     tech: ['SQL', 'Retail', 'Category Growth'],
   },
   {
-    banner: 'grid',
+    image: assetUrl('images/projects/melbourne-geospatial.png'),
+    imageAlt: 'Melbourne city skyline with geospatial map pins and foot-traffic heat zones',
     title: 'Melbourne City Geospatial (Python)',
     href: 'https://github.com/vinitshetty16/City-of-Melbourne/tree/main',
     description:
@@ -223,7 +228,8 @@ export const projects: ProjectItem[] = [
     tech: ['Python', 'Geospatial', 'Public Planning'],
   },
   {
-    banner: 'donut',
+    image: assetUrl('images/projects/hr-insights-tableau.png'),
+    imageAlt: 'Human resources analytics dashboard showing attrition, hiring funnel, and demographics',
     title: 'Human Resources Insights (Tableau)',
     href: 'https://github.com/vinitshetty16/Human-Resources-Insights-using-Tableau',
     description:
@@ -231,7 +237,8 @@ export const projects: ProjectItem[] = [
     tech: ['Tableau', 'HR Analytics', 'Leadership KPIs'],
   },
   {
-    banner: 'scatter',
+    image: assetUrl('images/projects/taxi-hypothesis-testing.png'),
+    imageAlt: 'NYC yellow taxi with statistical hypothesis testing and fare analysis charts',
     title: 'Taxi Revenue, Hypothesis Testing',
     href: 'https://github.com/vinitshetty16/Maximizing-Revenue-for-Taxi-Cab-Hypothesis-Testing',
     description:

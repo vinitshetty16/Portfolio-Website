@@ -3,7 +3,7 @@ import { projects, projectsIntro } from '../content'
 import type { ProjectItem } from '../content'
 import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
-import { ProjectBannerSvg } from './ProjectBannerSvg'
+import { ProjectBannerImage } from './ProjectBannerImage'
 
 function wrapOffset(index: number, active: number, len: number): number {
   let d = index - active
@@ -86,7 +86,12 @@ function ProjectCard({
       {isSide && <span className="project-card__peek font-mono">View</span>}
 
       <div className="project-card__banner project-card__banner--stage">
-        <ProjectBannerSvg kind={project.banner} visible={active || Math.abs(offset) === 1} boost={hover && active} />
+        <ProjectBannerImage
+          src={project.image}
+          alt={project.imageAlt}
+          active={active}
+          boost={hover && active}
+        />
         <div className="project-card__banner-shade" aria-hidden />
         {active && <h3 className="project-card__banner-title font-display">{project.title}</h3>}
         {active && (
