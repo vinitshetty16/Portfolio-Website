@@ -159,7 +159,7 @@ export const educationCards: EducationFlip[] = [
 ]
 
 export const projectsIntro =
-  'Eight builds across supply chain, ERP, and BI. Use the arrows, tap a side card, or pick a project below.'
+  'Eight builds across supply chain, ERP, and BI. Use the arrows or swipe to explore.'
 
 export type ProjectItem = {
   title: string

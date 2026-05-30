@@ -12,11 +12,6 @@ function wrapOffset(index: number, active: number, len: number): number {
   return d
 }
 
-function shortTitle(title: string): string {
-  const cut = title.split('(')[0]?.trim() ?? title
-  return cut.length > 28 ? `${cut.slice(0, 26)}…` : cut
-}
-
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -181,8 +176,6 @@ export function Projects() {
     touchStartX.current = null
   }
 
-  const nextIndex = (active + 1) % projects.length
-
   return (
     <section id="projects" className="section section--alt projects">
       <ParallaxLift maxPx={-14}>
@@ -240,34 +233,6 @@ export function Projects() {
               <button type="button" className="projects-stage__arrow projects-stage__arrow--next projects-stage__arrow--pulse" onClick={next} aria-label="Next project">
                 <Chevron dir="right" />
               </button>
-
-              <div className="projects-stage__footer">
-                <div className="projects-stage__progress" aria-hidden>
-                  <span className="projects-stage__progress-fill" style={{ width: `${((active + 1) / projects.length) * 100}%` }} />
-                </div>
-                <p className="projects-stage__counter font-mono">
-                  {String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                </p>
-                <p className="projects-stage__next font-mono">
-                  Next: <span>{shortTitle(projects[nextIndex].title)}</span>
-                </p>
-              </div>
-
-              <div className="projects-stage__filmstrip" role="tablist" aria-label="All projects">
-                {projects.map((p, i) => (
-                  <button
-                    key={p.title}
-                    type="button"
-                    role="tab"
-                    aria-selected={i === active}
-                    className={`projects-stage__chip font-mono ${i === active ? 'is-active' : ''}`}
-                    onClick={() => go(i, i > active ? 'next' : 'prev')}
-                  >
-                    <span className="projects-stage__chip-num">{i + 1}</span>
-                    {shortTitle(p.title)}
-                  </button>
-                ))}
-              </div>
             </div>
           </Reveal>
         </div>
