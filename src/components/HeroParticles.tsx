@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-const N = 60
-const LINK_DIST = 120
-const DOT_ALPHA = 0.2
-const LINE_ALPHA = 0.08
+const N = 36
+const LINK_DIST = 100
+const DOT_ALPHA = 0.12
+const LINE_ALPHA = 0.04
 const COLOR = '59, 130, 246'
 
 type P = { x: number; y: number; vx: number; vy: number }
