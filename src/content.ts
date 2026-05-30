@@ -159,7 +159,7 @@ export const educationCards: EducationFlip[] = [
 ]
 
 export const projectsIntro =
-  'Reporting and analytics builds across supply chain, ERP operations, and enterprise data. Select a project below or browse the carousel.'
+  'Reporting and analytics builds across supply chain, ERP operations, and enterprise data.'
 
 export type ProjectBanner = 'f1-car' | 'afl-oval' | 'bars' | 'grid' | 'donut' | 'scatter'
 

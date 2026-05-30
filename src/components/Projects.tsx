@@ -1,28 +1,28 @@
-import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent, type TouchEvent } from 'react'
 import { projects, projectsIntro } from '../content'
 import type { ProjectItem } from '../content'
 import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 import { ProjectBannerSvg } from './ProjectBannerSvg'
 
-function ProjectCard({ project }: { project: ProjectItem }) {
-  const [vis, setVis] = useState(false)
+function Chevron({ dir }: { dir: 'left' | 'right' }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d={dir === 'left' ? 'M14 6 L8 12 L14 18' : 'M10 6 L16 12 L10 18'}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function ProjectCard({ project, active }: { project: ProjectItem; active: boolean }) {
   const [hover, setHover] = useState(false)
   const rootRef = useRef<HTMLArticleElement | null>(null)
   const glareRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const el = rootRef.current
-    if (!el) return
-    const o = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setVis(true)
-      },
-      { threshold: 0.15 },
-    )
-    o.observe(el)
-    return () => o.disconnect()
-  }, [])
 
   const onGlareMove = (e: MouseEvent<HTMLElement>) => {
     const root = rootRef.current
@@ -42,7 +42,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
   return (
     <article
       ref={rootRef}
-      className={`project-card tilt-card ${project.featured ? 'project-card--featured project-card--float' : ''}`}
+      className={`project-card tilt-card ${project.featured ? 'project-card--featured' : ''} ${active ? 'project-card--slider-active' : ''}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false)
@@ -53,7 +53,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
       <div ref={glareRef} className="project-card__glare" aria-hidden />
       {project.featured && <span className="project-card__badge font-mono">Featured project</span>}
       <div className={`project-card__banner ${project.featured ? 'project-card__banner--featured' : ''}`}>
-        <ProjectBannerSvg kind={project.banner} visible={vis} boost={hover} />
+        <ProjectBannerSvg kind={project.banner} visible={active} boost={hover} />
         <ul
           className={`project-card__tech font-mono ${project.featured ? 'project-card__tech--featured' : ''}`}
         >
@@ -77,38 +77,43 @@ function ProjectCard({ project }: { project: ProjectItem }) {
 
 export function Projects() {
   const [active, setActive] = useState(0)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [direction, setDirection] = useState<'next' | 'prev'>('next')
+  const touchStartX = useRef<number | null>(null)
 
-  const scrollTo = useCallback((index: number) => {
-    const i = Math.max(0, Math.min(projects.length - 1, index))
+  const go = useCallback((next: number, dir: 'next' | 'prev') => {
+    const i = Math.max(0, Math.min(projects.length - 1, next))
+    if (i === active) return
+    setDirection(dir)
     setActive(i)
-    slideRefs.current[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
-  }, [])
+  }, [active])
+
+  const prev = () => go(active - 1, 'prev')
+  const next = () => go(active + 1, 'next')
 
   useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    const onScroll = () => {
-      const center = track.scrollLeft + track.clientWidth / 2
-      let closest = 0
-      let minDist = Infinity
-      slideRefs.current.forEach((slide, idx) => {
-        if (!slide) return
-        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2
-        const dist = Math.abs(center - slideCenter)
-        if (dist < minDist) {
-          minDist = dist
-          closest = idx
-        }
-      })
-      setActive(closest)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') go(active - 1, 'prev')
+      if (e.key === 'ArrowRight') go(active + 1, 'next')
     }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [active, go])
 
-    track.addEventListener('scroll', onScroll, { passive: true })
-    return () => track.removeEventListener('scroll', onScroll)
-  }, [])
+  const onTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0]?.clientX ?? null
+  }
+
+  const onTouchEnd = (e: TouchEvent) => {
+    const start = touchStartX.current
+    if (start == null) return
+    const end = e.changedTouches[0]?.clientX ?? start
+    const delta = end - start
+    if (Math.abs(delta) > 48) {
+      if (delta < 0) next()
+      else prev()
+    }
+    touchStartX.current = null
+  }
 
   return (
     <section id="projects" className="section section--alt projects">
@@ -121,58 +126,52 @@ export function Projects() {
             </header>
           </Reveal>
 
-          <Reveal className="projects-carousel">
-            <nav className="projects-carousel__menu" aria-label="Project navigation">
-              {projects.map((p, i) => (
-                <button
-                  key={p.title}
-                  type="button"
-                  className={`projects-carousel__tab font-mono ${active === i ? 'is-active' : ''}`}
-                  onClick={() => scrollTo(i)}
-                  aria-current={active === i ? 'true' : undefined}
-                >
-                  {p.title}
-                </button>
-              ))}
-            </nav>
-
-            <div className="projects-carousel__controls">
+          <Reveal className="projects-slider">
+            <div className="projects-slider__shell">
               <button
                 type="button"
-                className="projects-carousel__btn font-mono"
-                onClick={() => scrollTo(active - 1)}
+                className="projects-slider__arrow projects-slider__arrow--prev"
+                onClick={prev}
                 disabled={active === 0}
                 aria-label="Previous project"
               >
-                Prev
+                <Chevron dir="left" />
               </button>
-              <span className="projects-carousel__count font-mono">
-                {active + 1} / {projects.length}
-              </span>
+
+              <div
+                className="projects-slider__viewport"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+                aria-live="polite"
+              >
+                <div
+                  className="projects-slider__track"
+                  style={{ transform: `translate3d(-${active * 100}%, 0, 0)` }}
+                >
+                  {projects.map((p, i) => (
+                    <div
+                      key={p.title}
+                      className={`projects-slider__slide ${i === active ? 'is-active' : ''} projects-slider__slide--${direction}`}
+                      aria-hidden={i !== active}
+                    >
+                      <ProjectCard project={p} active={i === active} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 type="button"
-                className="projects-carousel__btn font-mono"
-                onClick={() => scrollTo(active + 1)}
+                className="projects-slider__arrow projects-slider__arrow--next"
+                onClick={next}
                 disabled={active === projects.length - 1}
                 aria-label="Next project"
               >
-                Next
+                <Chevron dir="right" />
               </button>
             </div>
 
-            <div ref={trackRef} className="projects-carousel__track">
-              {projects.map((p, i) => (
-                <div
-                  key={p.title}
-                  ref={(el) => {
-                    slideRefs.current[i] = el
-                  }}
-                  className={`projects-carousel__slide ${active === i ? 'is-active' : ''}`}
-                >
-                  <ProjectCard project={p} />
-                </div>
-              ))}
-            </div>
+            <div className="projects-slider__glow" aria-hidden />
           </Reveal>
         </div>
       </ParallaxLift>
