@@ -1,17 +1,29 @@
-import { useCallback, useEffect, useRef, useState, type MouseEvent, type TouchEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent, type TouchEvent } from 'react'
 import { projects, projectsIntro } from '../content'
 import type { ProjectItem } from '../content'
 import { ParallaxLift } from './ParallaxLift'
 import { Reveal } from './Reveal'
 import { ProjectBannerSvg } from './ProjectBannerSvg'
 
+function wrapOffset(index: number, active: number, len: number): number {
+  let d = index - active
+  while (d > len / 2) d -= len
+  while (d < -len / 2) d += len
+  return d
+}
+
+function shortTitle(title: string): string {
+  const cut = title.split('(')[0]?.trim() ?? title
+  return cut.length > 28 ? `${cut.slice(0, 26)}…` : cut
+}
+
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
         d={dir === 'left' ? 'M14 6 L8 12 L14 18' : 'M10 6 L16 12 L10 18'}
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -19,58 +31,87 @@ function Chevron({ dir }: { dir: 'left' | 'right' }) {
   )
 }
 
-function ProjectCard({ project, active }: { project: ProjectItem; active: boolean }) {
+function ProjectCard({
+  project,
+  active,
+  offset,
+  onSelect,
+}: {
+  project: ProjectItem
+  active: boolean
+  offset: number
+  onSelect: () => void
+}) {
   const [hover, setHover] = useState(false)
-  const rootRef = useRef<HTMLArticleElement | null>(null)
   const glareRef = useRef<HTMLDivElement | null>(null)
+  const isSide = offset !== 0
 
   const onGlareMove = (e: MouseEvent<HTMLElement>) => {
-    const root = rootRef.current
+    if (!active) return
     const glare = glareRef.current
-    if (!root || !glare) return
+    const root = e.currentTarget
+    if (!glare) return
     const r = root.getBoundingClientRect()
     glare.style.left = `${((e.clientX - r.left) / r.width) * 100}%`
     glare.style.top = `${((e.clientY - r.top) / r.height) * 100}%`
-    glare.style.opacity = '0.06'
-  }
-
-  const onGlareLeave = () => {
-    const glare = glareRef.current
-    if (glare) glare.style.opacity = '0'
+    glare.style.opacity = '0.08'
   }
 
   return (
     <article
-      ref={rootRef}
-      className={`project-card tilt-card ${project.featured ? 'project-card--featured' : ''} ${active ? 'project-card--slider-active' : ''}`}
+      className={`project-card project-card--stage ${project.featured ? 'project-card--featured' : ''} ${active ? 'is-center' : 'is-side'} ${offset < 0 ? 'is-left' : ''} ${offset > 0 ? 'is-right' : ''}`}
+      style={{ ['--offset' as string]: String(Math.abs(offset)) }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false)
-        onGlareLeave()
+        if (glareRef.current) glareRef.current.style.opacity = '0'
       }}
       onMouseMove={onGlareMove}
+      onClick={isSide ? onSelect : undefined}
+      role={isSide ? 'button' : undefined}
+      tabIndex={isSide ? 0 : undefined}
+      onKeyDown={
+        isSide
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelect()
+              }
+            }
+          : undefined
+      }
     >
       <div ref={glareRef} className="project-card__glare" aria-hidden />
-      {project.featured && <span className="project-card__badge font-mono">Featured project</span>}
-      <div className={`project-card__banner ${project.featured ? 'project-card__banner--featured' : ''}`}>
-        <ProjectBannerSvg kind={project.banner} visible={active} boost={hover} />
-        <ul
-          className={`project-card__tech font-mono ${project.featured ? 'project-card__tech--featured' : ''}`}
-        >
-          {project.tech.map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
+      {project.featured && active && <span className="project-card__badge font-mono">Featured</span>}
+      {isSide && <span className="project-card__peek font-mono">View</span>}
+
+      <div className="project-card__banner project-card__banner--stage">
+        <ProjectBannerSvg kind={project.banner} visible={active || Math.abs(offset) === 1} boost={hover && active} />
+        <div className="project-card__banner-shade" aria-hidden />
+        {active && <h3 className="project-card__banner-title font-display">{project.title}</h3>}
+        {active && (
+          <ul className="project-card__tech project-card__tech--banner font-mono">
+            {project.tech.slice(0, 4).map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
+        )}
       </div>
-      <div className="project-card__body">
-        <h3 className="project-card__title font-display">{project.title}</h3>
-        <p className="project-card__desc font-body">{project.description}</p>
-        <div className="project-card__link-wrap">
-          <a className="project-card__link font-mono" href={project.href} target="_blank" rel="noreferrer">
-            View project
+
+      {active && (
+        <div className="project-card__body project-card__body--stage">
+          <p className="project-card__desc font-body">{project.description}</p>
+          <a
+            className="project-card__cta btn btn--primary font-mono"
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Open on GitHub
           </a>
         </div>
-      </div>
+      )}
     </article>
   )
 }
@@ -78,26 +119,46 @@ function ProjectCard({ project, active }: { project: ProjectItem; active: boolea
 export function Projects() {
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState<'next' | 'prev'>('next')
+  const [paused, setPaused] = useState(false)
+  const stageRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef<number | null>(null)
 
-  const go = useCallback((next: number, dir: 'next' | 'prev') => {
-    const i = Math.max(0, Math.min(projects.length - 1, next))
-    if (i === active) return
+  const go = useCallback((index: number, dir: 'next' | 'prev') => {
+    const i = ((index % projects.length) + projects.length) % projects.length
     setDirection(dir)
     setActive(i)
-  }, [active])
+  }, [])
 
-  const prev = () => go(active - 1, 'prev')
-  const next = () => go(active + 1, 'next')
+  const prev = useCallback(() => go(active - 1, 'prev'), [active, go])
+  const next = useCallback(() => go(active + 1, 'next'), [active, go])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') go(active - 1, 'prev')
-      if (e.key === 'ArrowRight') go(active + 1, 'next')
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [active, go])
+  }, [prev, next])
+
+  useEffect(() => {
+    if (paused) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const root = stageRef.current
+    if (!root) return
+    let visible = false
+    const obs = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting
+    }, { threshold: 0.35 })
+    obs.observe(root)
+    const id = window.setInterval(() => {
+      if (visible) setActive((a) => (a + 1) % projects.length)
+    }, 7000)
+    return () => {
+      obs.disconnect()
+      window.clearInterval(id)
+    }
+  }, [paused])
 
   const onTouchStart = (e: TouchEvent) => {
     touchStartX.current = e.touches[0]?.clientX ?? null
@@ -108,12 +169,14 @@ export function Projects() {
     if (start == null) return
     const end = e.changedTouches[0]?.clientX ?? start
     const delta = end - start
-    if (Math.abs(delta) > 48) {
+    if (Math.abs(delta) > 40) {
       if (delta < 0) next()
       else prev()
     }
     touchStartX.current = null
   }
+
+  const nextIndex = (active + 1) % projects.length
 
   return (
     <section id="projects" className="section section--alt projects">
@@ -126,52 +189,81 @@ export function Projects() {
             </header>
           </Reveal>
 
-          <Reveal className="projects-slider">
-            <div className="projects-slider__shell">
-              <button
-                type="button"
-                className="projects-slider__arrow projects-slider__arrow--prev"
-                onClick={prev}
-                disabled={active === 0}
-                aria-label="Previous project"
-              >
+          <Reveal>
+            <div
+              ref={stageRef}
+              className="projects-stage"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+            >
+              <div className="projects-stage__glow" aria-hidden />
+
+              <button type="button" className="projects-stage__arrow projects-stage__arrow--prev" onClick={prev} aria-label="Previous project">
                 <Chevron dir="left" />
               </button>
 
-              <div
-                className="projects-slider__viewport"
-                onTouchStart={onTouchStart}
-                onTouchEnd={onTouchEnd}
-                aria-live="polite"
-              >
-                <div
-                  className="projects-slider__track"
-                  style={{ transform: `translate3d(-${active * 100}%, 0, 0)` }}
-                >
-                  {projects.map((p, i) => (
+              <div className="projects-stage__deck" aria-live="polite">
+                {projects.map((p, i) => {
+                  const offset = wrapOffset(i, active, projects.length)
+                  if (Math.abs(offset) > 2) return null
+                  const style: CSSProperties = {
+                    zIndex: 20 - Math.abs(offset),
+                    opacity: 1 - Math.abs(offset) * 0.38,
+                    transform: `translate(-50%, -50%) translateX(${offset * 52}%) scale(${1 - Math.abs(offset) * 0.14}) rotateY(${offset * -14}deg)`,
+                    pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
+                  }
+                  return (
                     <div
                       key={p.title}
-                      className={`projects-slider__slide ${i === active ? 'is-active' : ''} projects-slider__slide--${direction}`}
-                      aria-hidden={i !== active}
+                      className={`projects-stage__slot projects-stage__slot--${direction}`}
+                      style={style}
+                      aria-hidden={offset !== 0}
                     >
-                      <ProjectCard project={p} active={i === active} />
+                      <ProjectCard
+                        project={p}
+                        active={offset === 0}
+                        offset={offset}
+                        onSelect={() => go(i, offset > 0 ? 'next' : 'prev')}
+                      />
                     </div>
-                  ))}
-                </div>
+                  )
+                })}
               </div>
 
-              <button
-                type="button"
-                className="projects-slider__arrow projects-slider__arrow--next"
-                onClick={next}
-                disabled={active === projects.length - 1}
-                aria-label="Next project"
-              >
+              <button type="button" className="projects-stage__arrow projects-stage__arrow--next projects-stage__arrow--pulse" onClick={next} aria-label="Next project">
                 <Chevron dir="right" />
               </button>
-            </div>
 
-            <div className="projects-slider__glow" aria-hidden />
+              <div className="projects-stage__footer">
+                <div className="projects-stage__progress" aria-hidden>
+                  <span className="projects-stage__progress-fill" style={{ width: `${((active + 1) / projects.length) * 100}%` }} />
+                </div>
+                <p className="projects-stage__counter font-mono">
+                  {String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                </p>
+                <p className="projects-stage__next font-mono">
+                  Next: <span>{shortTitle(projects[nextIndex].title)}</span>
+                </p>
+              </div>
+
+              <div className="projects-stage__filmstrip" role="tablist" aria-label="All projects">
+                {projects.map((p, i) => (
+                  <button
+                    key={p.title}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === active}
+                    className={`projects-stage__chip font-mono ${i === active ? 'is-active' : ''}`}
+                    onClick={() => go(i, i > active ? 'next' : 'prev')}
+                  >
+                    <span className="projects-stage__chip-num">{i + 1}</span>
+                    {shortTitle(p.title)}
+                  </button>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </ParallaxLift>
