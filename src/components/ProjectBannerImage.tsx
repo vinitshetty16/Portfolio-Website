@@ -3,9 +3,10 @@ type ProjectBannerImageProps = {
   alt: string
   active: boolean
   boost?: boolean
+  priority?: boolean
 }
 
-export function ProjectBannerImage({ src, alt, active, boost }: ProjectBannerImageProps) {
+export function ProjectBannerImage({ src, alt, active, boost, priority }: ProjectBannerImageProps) {
   return (
     <img
       className={`project-banner-img ${active ? 'project-banner-img--on' : ''} ${boost ? 'project-banner-img--boost' : ''}`}
@@ -13,7 +14,7 @@ export function ProjectBannerImage({ src, alt, active, boost }: ProjectBannerIma
       alt={alt}
       width={1536}
       height={1024}
-      loading={active ? 'eager' : 'lazy'}
+      loading={priority ? 'eager' : 'lazy'}
       decoding="async"
       draggable={false}
     />

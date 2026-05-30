@@ -1301,23 +1301,24 @@ body {
   overflow: hidden;
 }
 .project-card__banner--stage {
+  display: grid;
   aspect-ratio: 3 / 2;
   width: 100%;
-  height: auto;
+  min-height: 0;
+}
+.project-card__banner--stage > * {
+  grid-area: 1 / 1;
 }
 .project-card--stage.is-side .project-card__banner--stage {
   aspect-ratio: 3 / 2;
 }
 .project-banner-img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center center;
   z-index: 1;
-  transform: scale(1);
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  transition: filter 0.5s ease;
   filter: saturate(0.88) brightness(0.85);
 }
 .project-banner-img--on {
@@ -1327,8 +1328,8 @@ body {
   filter: saturate(1.04) brightness(1.02);
 }
 .project-card__banner-shade {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(180deg, rgba(8, 11, 20, 0.05) 0%, rgba(8, 11, 20, 0.35) 50%, rgba(8, 11, 20, 0.92) 100%);
   z-index: 2;
   pointer-events: none;

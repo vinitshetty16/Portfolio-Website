@@ -86,6 +86,7 @@ function ProjectCard({
           alt={project.imageAlt}
           active={active}
           boost={hover && active}
+          priority={active || Math.abs(offset) === 1}
         />
         <div className="project-card__banner-shade" aria-hidden />
         {active && <h3 className="project-card__banner-title font-display">{project.title}</h3>}
