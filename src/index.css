@@ -1139,7 +1139,7 @@ body {
 }
 .projects-stage__deck {
   position: relative;
-  height: clamp(560px, 78vw, 780px);
+  height: clamp(640px, 88vw, 880px);
   perspective: 1400px;
   margin: 0 auto;
   max-width: 1120px;
@@ -1206,7 +1206,7 @@ body {
 }
 @media (max-width: 640px) {
   .projects-stage__deck {
-    height: clamp(420px, 118vw, 560px);
+    height: clamp(480px, 132vw, 640px);
   }
   .projects-stage__slot {
     width: min(94vw, 960px);
@@ -1301,20 +1301,20 @@ body {
   overflow: hidden;
 }
 .project-card__banner--stage {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   width: 100%;
   height: auto;
 }
 .project-card--stage.is-side .project-card__banner--stage {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
 }
 .project-banner-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center center;
   z-index: 1;
   transform: scale(1);
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
@@ -1324,23 +1324,7 @@ body {
   filter: saturate(1) brightness(1);
 }
 .project-banner-img--on.project-banner-img--boost {
-  transform: scale(1.03);
-}
-@media (prefers-reduced-motion: no-preference) {
-  .project-banner-img--on {
-    animation: bannerKenBurns 16s ease-in-out infinite alternate;
-  }
-  .project-banner-img--on.project-banner-img--boost {
-    animation-duration: 9s;
-  }
-}
-@keyframes bannerKenBurns {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  100% {
-    transform: scale(1.06) translate(-1%, -0.5%);
-  }
+  filter: saturate(1.04) brightness(1.02);
 }
 .project-card__banner-shade {
   position: absolute;

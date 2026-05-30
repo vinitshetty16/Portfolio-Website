@@ -11,6 +11,8 @@ export function ProjectBannerImage({ src, alt, active, boost }: ProjectBannerIma
       className={`project-banner-img ${active ? 'project-banner-img--on' : ''} ${boost ? 'project-banner-img--boost' : ''}`}
       src={src}
       alt={alt}
+      width={1536}
+      height={1024}
       loading={active ? 'eager' : 'lazy'}
       decoding="async"
       draggable={false}
